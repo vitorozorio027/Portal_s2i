@@ -11,7 +11,7 @@ export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     ssr:true,
     components,
-    directives
+    directives,
   })
   app.vueApp.use(vuetify)
 })

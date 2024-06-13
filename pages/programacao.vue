@@ -1,10 +1,9 @@
 <template >
     <div >
-      <v-container>
-        <v-main>
+   
+    
           <programacaoSistema />
-        </v-main>
-      </v-container>
+    
         
     </div>
 </template>

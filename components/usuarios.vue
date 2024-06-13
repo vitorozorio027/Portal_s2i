@@ -82,9 +82,9 @@
                 <!--modal-->
                 <v-dialog
                 v-model="dialog"
-                class="w-100"
+                class="px-16"
                 >
-                    <v-card width="90%"  class="mx-auto pb-4" density="compact">
+                    <v-card  width="95%" class="mx-auto pb-4 " density="compact">
                         <div class="bg-indigo-darken-4 mb-6" style="height: 50px;">
                             <v-card-title class="text-h6">S2i - Linceça de Uso</v-card-title>
                         </div>

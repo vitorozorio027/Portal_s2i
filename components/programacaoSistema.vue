@@ -1,234 +1,246 @@
 <template >
- 
-        <v-card flat>
-                <v-card-item>
-                        <v-row dense>
-                                <v-col cols="4">
-                                        <v-text-field
-                                        prepend-inner-icon="mdi-magnify"
-                                        single-line
-                                        flat                       
-                                        variant="outlined"
-                                        rounded-lg
-                                        placeholder="Pesquisar..."
-                                        density="compact"
-                                        ></v-text-field>  
-                                </v-col>
-                                <v-spacer></v-spacer>
-                                <v-col cols="4">
-                                        <v-card-actions>
-                                                <v-spacer></v-spacer>
+
+<div class="px-8 pt-16">
+
+
+       
+                <div class="pt-10">
+                                <div class="d-flex justify-space-between mb-6">
+                                        <div class="w-25">
+                                                <v-text-field
+                                                :loading="loading"
+                                                append-inner-icon="mdi-magnify"
+                                                density="compact"
+                                                label="Pesquisar"
+                                                variant="solo"
+                                                hide-details
+                                                single-line
+                                                size="x-small"
+                                                @click:append-inner="onClick"
+                                                ></v-text-field>
+
+                                        </div>
+
+                                        <div >
+                                                <v-btn
+                                                class="mr-4"
+                                                color="indigo-darken-4"
+                                                >Novo</v-btn>
                                                 <v-btn
                                                 color="indigo-darken-4"
-                                                variant="flat"
-                                                text="Novo"
-                                                append-icon="mdi-plus"
-                                                ></v-btn>
-                                                <v-btn
-                                                color="indigo-darken-4"
-                                                variant="flat"
-                                                text="Salvar"
-                                                append-icon="mdi-check-circle"
-                                                ></v-btn>
-                                        </v-card-actions>
-                                </v-col>
-                        </v-row>
-                </v-card-item>
+                                                >Salvar</v-btn>
+                                        </div> 
+                                </div>
 
-
-                <v-card-item
-                style="position: relative; border: 1px solid black;   "
-                        class=" rounded  mx-4 mt-4 elevation-4 px-2 "
-                ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-body-1">Inspeções Planejadas</p>
-                        <div class="h-100">
-                                <v-row dense class="mx-2 pt-2">
-                                        <v-col cols="2">
-                                        <h1 class=" mx-2" style="font-size: 10px">Modalidade</h1>
-                                            <v-select
-                                                :items="['Elétrico','Mecânico']"
-                                                density="compact"
-                                                variant="outlined"
-                                                flat
-                                                class="text-caption"
-                                                chips    
-                                            ></v-select>
-                                        </v-col>
-
-                                        <v-col cols="1">
-                                        <h1 class=" mx-2 " style="font-size: 10px">Ordem</h1>
-                                        <v-text-field
-                                        density="compact"
-                                        type="text"
-                                        variant="outlined"
-                                        ></v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="2">
-                                        <h1 class="mx-2 " style="font-size: 10px">Descrição da inspeção</h1>
-                                        <v-text-field
-                                        density="compact"
-                                        type="text"
-                                        variant="outlined"
-                                        ></v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="2">
-                                        <h1 class=" mx-2 " style="font-size: 10px">Data Inicio</h1>
-                                        <v-text-field
-                                        density="compact"
-                                        type="date"
-                                        variant="outlined"
-                                        ></v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="2">
-                                        <h1 class=" mx-2 " style="font-size: 10px">Data Fim</h1>
-                                        <v-text-field
-                                        density="compact"
-                                        type="date"
-                                        variant="outlined"
-                                        ></v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="1">
-                                        <h1 class=" mx-2 " style="font-size: 10px">Escopo</h1>
-                                        <v-text-field
-                                        density="compact"
-                                        type="text"
-                                        variant="outlined"
-                                        ></v-text-field>
-                                        </v-col>
-
-                                        <v-col cols="1">
-                                        <h1 class=" mx-2 " style="font-size: 10px">Status</h1>
-                                        <v-text-field
-                                        density="compact"
-                                        type="text"
-                                        variant="outlined"
-                                        ></v-text-field>
-                                        </v-col>
-                                        <v-col class="d-flex mt-7">
-                                                <v-icon icon="mdi-magnify" style="font-size: 16px"></v-icon>
-                                                <v-icon icon="mdi-square-edit-outline" style="font-size: 16px"></v-icon>
-                                                <v-icon icon="mdi-check-all" style="font-size: 16px"></v-icon>
-                                                <v-icon icon="mdi-text-box-check" style="font-size: 16px"></v-icon>
-                                                <v-icon icon="mdi-trash-can" style="font-size: 16px"></v-icon>
-                                        </v-col>
-
-                                </v-row>
-
-
-
-
-
-
-
-
-                                <v-row>
-                                        <v-col >
-                                                <div
-                                                style="position: relative; border: 1px solid black;   height: 260px;"
-                                                class=" rounded  mx-4 mt-4 elevation-4 px-4 pb-2 "
-                                                ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-body-2">Locais Disponiveis</p>
-                                                <div class="my-2 w-75">
-                                                        <v-icon icon="mdi-magnify"></v-icon>
-                                                        <input type="search" v-model="procurar" class="border mt-2 px-2 py-1 rounded text-caption w-75" placeholder="procurar...">
-                                                </div>
-                                                
-                                                
-                                               <v-data-table-virtual
-                                                :items="elements"
-                                                :headers="headers"
-                                                :search="procurar"
-                                                height="200"
-                                                show-select
-                                                hover
-                                                fixed-header
-                                                density="compact"
-                                                class="text-caption "
-                                                no-data-text="Sem dados Correspondentes!"
-                                                loading-text="Carregando os Dados!"
-                                                return-object
-                                                v-model="selectedProgramacao"
-                                                >  
-                                                <template v-slot:header.title="{ column }" >
-                                                        <p class="text-grey-lighten-1"> {{ column.title }} </p>
-                                                </template>
-
-                                            
-                                                </v-data-table-virtual> 
-                                                </div>
-                                        </v-col>
-                                        <v-col cols="1" class="d-flex justify-center align-center">
-                                                <v-icon icon="mdi-swap-horizontal-bold" size="100"></v-icon>
-                                        </v-col>
-                                        <v-col >
-                                                <div
-                                                style="position: relative; border: 1px solid black;   height: 260px;"
-                                                class=" rounded  mx-4 mt-4 elevation-4 px-2 "
-                                                ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-body-2">Locais Selecionados</p>
-                                               <div class="w-100 d-flex justify-space-between align-center">
-                                                <div class="my-2 w-50">
-                                                        <v-icon icon="mdi-magnify"></v-icon>
-                                                        <input type="search" v-model="procurarProgramacao" class="border mt-2 px-2 py-1 rounded text-caption w-75" placeholder="procurar...">
-                                                </div>
-                                                <div>
-                                                        <p class="text-caption ">Qtd.Posições: {{ selectedProgramacao.length }}</p>
+                                <!--Outra secção-->
+                                <div
+                                style="position: relative; border: 1px solid #BDBDBD; "
+                                class=" rounded  mx-auto mt-4  pa-6 h-100"
+                                ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-body-2">Inspeção Planejadas</p>
+                                       
+                                
+                                <!--SECÇÃO PLANEJAMENTO-->
+                                        <div style="height: 370px;">
+                                                <div class="d-flex  font-weight-bold mb-2" style="font-size: 10px;">
+                                                        <p style="width: 10%;" class="ml-2">Modalidade</p>
+                                                        <p style="width: 5%;" class="ml-2">Ordem</p>
+                                                        <p style="width: 17%;" class="ml-2">Descrição da Inspeção</p>
+                                                        <p style="width: 9%;" class="ml-2">Data inicio</p>
+                                                        <p style="width: 9%;" class="ml-2">Data fim</p>
+                                                        <p style="width: 10%;" class="ml-2">Analista</p>
+                                                        <p style="width: 10%;" class="ml-2">Inspetor</p>
+                                                        <p style="width: 7%;" class="ml-2">Escopo</p>
+                                                        <p style="width: 7%;">Recurso</p>
+                                                        <p>status</p>
                                                 </div>
 
-                                               </div>
-                                              
+
+                                                <div  class="d-flex">
+                                                        <div style="width: 10%;">
+                                                                <v-select
+                                                                variant="outlined"
+                                                                density="compact"
+                                                                :items="['Mecânico', 'Elétrico']"
+                                                                flat
+                                                                >
+                                                                        <template v-slot:selection="{ item }">
+                                                                                <v-chip 
+                                                                                variant="text"   
+                                                                                density="comfortable" size="x-small"                                                                  
+                                                                                >
+                                                                                        {{ item.title }}
+                                                                                </v-chip>
+                                                                        </template> 
+                                                                </v-select>
+                                                        </div>
 
 
-                                                <v-data-table-virtual
-                                                :items="selectedProgramacao"
-                                                :headers="headersProgramacao"
-                                                height="200"
-                                             
-                                                :search="procurarProgramacao"
-                                                hover
-                                                fixed-header
-                                                density="compact"
-                                                class="text-caption"
-                                                no-data-text="Aguardando seleção!"
-                                                loading-text="Carregando os Dados!"
-                                            
-                                                
-                                                >  
-                                                        <template v-slot:item.actions="{ value }">
-                                                                <v-icon icon="mdi-trash-can" @click="dialog = true"></v-icon>
-                                                        </template>
+                                                        <div style="width: 5%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+
                                                         
-                                                </v-data-table-virtual> 
+                                                        <div style="width: 17%;" class="">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+
+                                                        <div style="width: 9%;" class="mx-2">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+
+                                                        <div style="width: 9%;" class="">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+                                                        <div style="width: 10%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+                                                        <div style="width: 10%;" class="">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+                                                        <div  class="mt-2 mx-2">
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="dialog = true">--selecione</v-btn>
+                                                        </div>
+                                                        <div  class="mt-2 ">
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" >--selecione</v-btn>
+                                                        </div>
+                                                        <div style="width: 6%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-1 pt-2 pb-3 rounded text-red text-center" value="Pendente">
+                                                        </div>
+                                                        <div>
+                                                                <v-icon icon="mdi-magnify" class="text-body-2 mt-3" @click="true"></v-icon>
+                                                                <v-icon icon="mdi-check-all" class="text-body-2 mt-3 mx-1" @click="true"></v-icon>
+                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="true"></v-icon>
+                                                        </div>
+
                                                 </div>
-                                        </v-col>
-                                </v-row>
-                        </div>
-                </v-card-item>
+                                        </div>
 
 
 
 
 
+                                        <!--MODAL-->
+                                        <v-dialog
+                                        v-model="dialog"
+                                        width="auto"
+                                        >
+                                                <v-card width="800" >
+                                                        <v-card-title class="bg-indigo-darken-4">
+                                                                Escopo
+                                                        </v-card-title>
+                                                        <div style="overflow-y: auto;">
+                                                                <v-card-item>
+                                                                        <div
+                                                                        style="position: relative; border: 1px solid black;   height: 220px;"
+                                                                        class=" rounded  mx-4 mt-4 elevation-4 px-4 pb-2 "
+                                                                        ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-body-2">Locais Disponiveis</p>
+                                                                        <div class="my-2 w-75">
+                                                                                <v-icon icon="mdi-magnify"></v-icon>
+                                                                                <input type="search" v-model="procurar" class="border mt-2 px-2 py-1 rounded text-caption w-75" placeholder="procurar...">
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        <v-data-table-virtual
+                                                                        :items="elements"
+                                                                        :headers="headers"
+                                                                        :search="procurar"
+                                                                        height="150"
+                                                                        show-select
+                                                                        hover
+                                                                        fixed-header
+                                                                        density="compact"
+                                                                        class="text-caption "
+                                                                        no-data-text="Sem dados Correspondentes!"
+                                                                        loading-text="Carregando os Dados!"
+                                                                        return-object
+                                                                        v-model="selectedProgramacao"
+                                                                        >  
+                                                                        <template v-slot:header.title="{ column }" >
+                                                                                <p class="text-grey-lighten-1"> {{ column.title }} </p>
+                                                                        </template>
+
+                                                                
+                                                                        </v-data-table-virtual> 
+                                                                        </div>
+                                                                </v-card-item>
+                                                                <div class="d-flex justify-center align-center">
+                                                                        <v-icon icon="mdi-swap-vertical-bold" size="30"></v-icon>
+                                                                </div>
+                                                                <v-card-item>
+                                                        
+                                                                        <div
+                                                                        style="position: relative; border: 1px solid black;   max-height: 220px;"
+                                                                        class=" rounded  mx-4 mt-2 elevation-4 px-2 "
+                                                                        ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-body-2">Locais Selecionados</p>
+                                                                                <div class="w-100 d-flex justify-space-between align-center">
+                                                                                <div class="my-2 w-50">
+                                                                                        <v-icon icon="mdi-magnify"></v-icon>
+                                                                                        <input type="search" v-model="procurarProgramacao" class="border mt-2 px-2 py-1 rounded text-caption w-75" placeholder="procurar...">
+                                                                                </div>
+                                                                                <div class="d-flex justify-center align-center">
+                                                                                        <v-icon icon="mdi-broom" @click="selectedProgramacao = []"></v-icon>
+                                                                                        <p class="text-caption ml-2">Qtd.Posições: {{ selectedProgramacao.length }}</p>
+                                                                                </div>
+
+                                                                        </div>
+                                                                
+
+
+                                                                                <v-data-table-virtual
+                                                                                :items="selectedProgramacao"
+                                                                                :headers="headersProgramacao"
+                                                                                height="150"
+                                                                        
+                                                                                :search="procurarProgramacao"
+                                                                                hover
+                                                                                fixed-header
+                                                                                density="compact"
+                                                                                class="text-caption"
+                                                                                no-data-text="Aguardando seleção!"
+                                                                                loading-text="Carregando os Dados!"
+                                                                        
+                                                                                
+                                                                                >  
+                                                                                        <template v-slot:item.actions="{ value }">
+                                                                                                <v-icon icon="mdi-trash-can" @click="dialog = true" ></v-icon>
+                                                                                        </template>
+                                                                                        
+                                                                                </v-data-table-virtual> 
+                                                                        </div>
+                                                                </v-card-item>
+
+                                                                <v-card-item>
+                                                                        <hr>
+                                                                        <v-card-actions>
+                                                                                <v-spacer></v-spacer>
+                                                                                <v-btn color="error" variant="flat" @click="dialog = false">Cancelar</v-btn>
+                                                                                <v-btn variant="flat" color="indigo-darken-4">Salvar</v-btn>
+                                                                        </v-card-actions>
+                                                                </v-card-item>
+                                                        </div>
+                                                </v-card>
+                                        </v-dialog>
+                                </div>
 
 
 
-
-
-
-
-        </v-card>
-    
+                </div>
+        </div>
 </template>
-<style>
-        input:focus {
-        box-shadow: 0 0 0 0;
-        outline: 0;
-        }
-</style>
+
 
 <script setup>
 import { ref } from 'vue';
+
+const dialog = ref (true)
+const loading = ref(false);
+const onClick = () =>{
+        loading.value = true
+
+        setTimeout(() => {
+        loading.value = false
+        }, 2000)
+}
 
 const selectedProgramacao = ref([])
 const procurar = ref('');
@@ -287,3 +299,14 @@ const elements = [
 
 
 </script>
+
+
+
+<style>
+input:focus {
+box-shadow: 0 0 0 0;
+outline: 0;
+}
+
+        
+</style>

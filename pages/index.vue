@@ -61,7 +61,7 @@
         to="/cadastroUsuarios"
         block
       >
-        Incicar a Sessão
+        Iniciar a Sessão
       </v-btn>
 
     
