@@ -25,6 +25,7 @@
                                                 <v-btn
                                                 class="mr-4"
                                                 color="indigo-darken-4"
+                                                @click="teste=true"
                                                 >Novo</v-btn>
                                                 <v-btn
                                                 color="indigo-darken-4"
@@ -55,13 +56,15 @@
                                                 </div>
 
 
-                                                <div  class="d-flex">
+                                                <div  class="d-flex" v-if="teste">
                                                         <div style="width: 10%;">
                                                                 <v-select
                                                                 variant="outlined"
                                                                 density="compact"
                                                                 :items="['Mecânico', 'Elétrico']"
+                                                               
                                                                 flat
+                        
                                                                 >
                                                                         <template v-slot:selection="{ item }">
                                                                                 <v-chip 
@@ -98,10 +101,10 @@
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
                                                         </div>
                                                         <div  class="mt-2 mx-2">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="dialog = true">--selecione</v-btn>
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
                                                         </div>
                                                         <div  class="mt-2 ">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" >--selecione</v-btn>
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
                                                         </div>
                                                         <div style="width: 6%;" class="mx-2">
                                                                 <input type="text" class="border border-sm w-100 text-caption px-1 pt-2 pb-3 rounded text-red text-center" value="Pendente">
@@ -113,7 +116,102 @@
                                                         </div>
 
                                                 </div>
+
+
+
+
+
+
+
+                                                 <!--SECÃO DE CARD-->
+
+                                        <div 
+                                        v-for="(card, i ) in cards"
+                                        :key="i"
+                                        >
+                                                <v-card class="d-flex px-2 mb-2 " elevation="1" rounded flat>
+                                                        <div style="width: 10%;">
+                                                                <v-select
+                                                                variant="outlined"
+                                                                density="compact"
+                                                                :items="['Mecânico', 'Elétrico']"
+                                                                :value="card.Modalidade"
+                                                                flat
+                                                                readonly
+                                                                >
+                                                                        <template v-slot:selection="{ item }">
+                                                                                <v-chip 
+                                                                                variant="text"   
+                                                                                density="comfortable" size="x-small"                                                                  
+                                                                                >
+                                                                                        {{ item.title }}
+                                                                                </v-chip>
+                                                                        </template> 
+                                                                </v-select>
+                                                        </div>
+
+
+                                                        <div style="width: 5%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded" :value="card.Ordem">
+                                                        </div>
+
+                                                        
+                                                        <div style="width: 17%;" class="">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded" :value="card.Desc_Insp">
+                                                        </div>
+
+                                                        <div style="width: 9%;" class="mx-2">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+
+                                                        <div style="width: 9%;" class="">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+                                                        <div style="width: 10%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+                                                        <div style="width: 10%;" class="">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                        </div>
+                                                        <div  class="mt-2 mx-2">
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
+                                                        </div>
+                                                        <div  class="mt-2 ">
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
+                                                        </div>
+                                                        <div style="width: 6%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-1 pt-2 pb-3 rounded text-red text-center" value="Pendente">
+                                                        </div>
+                                                        <div>
+                                                                <v-icon icon="mdi-magnify" class="text-body-2 mt-3" @click="true"></v-icon>
+                                                                <v-icon icon="mdi-check-all" class="text-body-2 mt-3 mx-1" @click="true"></v-icon>
+                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="true"></v-icon>
+                                                        </div>
+
+                                                </v-card>
                                         </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -123,8 +221,10 @@
                                         <v-dialog
                                         v-model="dialog"
                                         width="auto"
+                                        persistent
                                         >
-                                                <v-card width="800" >
+                                                <!--CARD ESCOPO-->
+                                                <v-card width="800" v-if="opcao=='escopo'">
                                                         <v-card-title class="bg-indigo-darken-4">
                                                                 Escopo
                                                         </v-card-title>
@@ -219,6 +319,36 @@
                                                                 </v-card-item>
                                                         </div>
                                                 </v-card>
+
+
+                                                <!--CARD RECURSO-->
+                                                <v-card
+                                                v-if="opcao!='escopo'"
+                                                width="700"
+                                               
+                                                >
+                                                <v-card-title class="bg-indigo-darken-4">
+                                                                Recurso
+                                                </v-card-title>
+                                                <v-card-item>
+                                                        <v-textarea label="Descreva aqui..." 
+                                                        variant="outlined"
+                                                        flat
+                                                        counter="1000"
+                                                        rows="14"
+                                                        single-line
+                                                        ></v-textarea>
+                                                </v-card-item>
+
+                                                <v-card-item>
+                                                        <hr>
+                                                        <v-card-actions>
+                                                                <v-spacer></v-spacer>
+                                                                <v-btn color="error" variant="flat" @click="dialog = false">Cancelar</v-btn>
+                                                                <v-btn variant="flat" color="indigo-darken-4">Salvar</v-btn>
+                                                        </v-card-actions>
+                                                </v-card-item>
+                                                </v-card>
                                         </v-dialog>
                                 </div>
 
@@ -232,7 +362,8 @@
 <script setup>
 import { ref } from 'vue';
 
-const dialog = ref (true)
+const teste = ref(false)
+const dialog = ref (false)
 const loading = ref(false);
 const onClick = () =>{
         loading.value = true
@@ -295,6 +426,66 @@ const elements = [
     {title: 'Espaço reservado para os Locais s2i-PO00029'},
     {title: 'Espaço reservado para os Locais s2i-PO00030'}
 ]
+
+
+
+const cards = ref([
+{
+        Modalidade: 'Mecânico',
+        Ordem: '0001',
+        Desc_Insp: 'Espaço reservado para descrição',
+        Data_inicio: '12-06-2024',
+        Data_fim: '25-06-2024',
+        Analista: 'Analista_01',
+        Inspetor: 'Inspetor_01'
+},
+{
+        Modalidade: 'Mecânico',
+        Ordem: '0002',
+        Desc_Insp: 'Espaço reservado para descrição',
+        Data_inicio: '13-06-2024',
+        Data_fim: '26-06-2024',
+        Analista: 'Analista_02',
+        Inspetor: 'Inspetor_02'
+},
+
+{
+        Modalidade: 'Mecânico',
+        Ordem: '0003',
+        Desc_Insp: 'Espaço reservado para descrição',
+        Data_inicio: '15-06-2024',
+        Data_fim: '25-06-2024',
+        Analista: 'Analista_03',
+        Inspetor: 'Inspetor_03'
+},
+
+{
+        Modalidade: 'Mecânico',
+        Ordem: '0004',
+        Desc_Insp: 'Espaço reservado para descrição',
+        Data_inicio: '11-06-2024',
+        Data_fim: '25-06-2024',
+        Analista: 'Analista_04',
+        Inspetor: 'Inspetor_04'
+},
+
+])
+
+
+const opcao = ref('')
+const index = ref(null)
+const nomeForm = ref ('')
+const situacaoForm = ref (null)
+
+
+const abrirModal = (op) => {
+    //nomeForm.value = ''
+    //situacaoForm.value = null
+    opcao.value = op;
+    //index.value = i
+    dialog.value = true;
+    
+}
 
 
 
