@@ -25,7 +25,7 @@
                                                 <v-btn
                                                 class="mr-4"
                                                 color="indigo-darken-4"
-                                                @click="teste=true"
+                                                @click="addCard"
                                                 >Novo</v-btn>
                                                 <v-btn
                                                 color="indigo-darken-4"
@@ -41,7 +41,7 @@
                                        
                                 
                                 <!--SECÇÃO PLANEJAMENTO-->
-                                        <div style="height: 370px;">
+                                        <div style="height: 370px; overflow-y: auto">
                                                 <div class="d-flex  font-weight-bold mb-2" style="font-size: 10px;">
                                                         <p style="width: 10%;" class="ml-2">Modalidade</p>
                                                         <p style="width: 5%;" class="ml-2">Ordem</p>
@@ -56,67 +56,6 @@
                                                 </div>
 
 
-                                                <div  class="d-flex" v-if="teste">
-                                                        <div style="width: 10%;">
-                                                                <v-select
-                                                                variant="outlined"
-                                                                density="compact"
-                                                                :items="['Mecânico', 'Elétrico']"
-                                                               
-                                                                flat
-                        
-                                                                >
-                                                                        <template v-slot:selection="{ item }">
-                                                                                <v-chip 
-                                                                                variant="text"   
-                                                                                density="comfortable" size="x-small"                                                                  
-                                                                                >
-                                                                                        {{ item.title }}
-                                                                                </v-chip>
-                                                                        </template> 
-                                                                </v-select>
-                                                        </div>
-
-
-                                                        <div style="width: 5%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
-                                                        </div>
-
-                                                        
-                                                        <div style="width: 17%;" class="">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
-                                                        </div>
-
-                                                        <div style="width: 9%;" class="mx-2">
-                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
-                                                        </div>
-
-                                                        <div style="width: 9%;" class="">
-                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
-                                                        </div>
-                                                        <div style="width: 10%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
-                                                        </div>
-                                                        <div style="width: 10%;" class="">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
-                                                        </div>
-                                                        <div  class="mt-2 mx-2">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
-                                                        </div>
-                                                        <div  class="mt-2 ">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
-                                                        </div>
-                                                        <div style="width: 6%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-1 pt-2 pb-3 rounded text-red text-center" value="Pendente">
-                                                        </div>
-                                                        <div>
-                                                                <v-icon icon="mdi-magnify" class="text-body-2 mt-3" @click="true"></v-icon>
-                                                                <v-icon icon="mdi-check-all" class="text-body-2 mt-3 mx-1" @click="true"></v-icon>
-                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="true"></v-icon>
-                                                        </div>
-
-                                                </div>
-
 
 
 
@@ -125,19 +64,21 @@
 
                                                  <!--SECÃO DE CARD-->
 
-                                        <div 
-                                        v-for="(card, i ) in cards"
-                                        :key="i"
-                                        >
-                                                <v-card class="d-flex px-2 mb-2 " elevation="1" rounded flat>
-                                                        <div style="width: 10%;">
+                                      
+                                                <div class="d-flex px-1 mb-2 elevation-2 rounded border pt-2" 
+                                                 v-for="(card, i ) in cards"
+                                                 :key="i"
+                                                >
+
+                                                    
+                                                        <div style="width: 10%; height: 50px;"  >
                                                                 <v-select
                                                                 variant="outlined"
                                                                 density="compact"
                                                                 :items="['Mecânico', 'Elétrico']"
-                                                                :value="card.Modalidade"
+                                                             
                                                                 flat
-                                                                readonly
+                                                             
                                                                 >
                                                                         <template v-slot:selection="{ item }">
                                                                                 <v-chip 
@@ -151,12 +92,12 @@
                                                         </div>
 
 
-                                                        <div style="width: 5%;" class="mx-2">
+                                                        <div style="width: 4%;" class="mx-2">
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded" :value="card.Ordem">
                                                         </div>
 
                                                         
-                                                        <div style="width: 17%;" class="">
+                                                        <div style="width: 20%;" class="">
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded" :value="card.Desc_Insp">
                                                         </div>
 
@@ -167,10 +108,10 @@
                                                         <div style="width: 9%;" class="">
                                                                 <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
                                                         </div>
-                                                        <div style="width: 10%;" class="mx-2">
+                                                        <div style="width: 9%;" class="mx-2">
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
                                                         </div>
-                                                        <div style="width: 10%;" class="">
+                                                        <div style="width: 9%;" class="">
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
                                                         </div>
                                                         <div  class="mt-2 mx-2">
@@ -184,11 +125,11 @@
                                                         </div>
                                                         <div>
                                                                 <v-icon icon="mdi-magnify" class="text-body-2 mt-3" @click="true"></v-icon>
-                                                                <v-icon icon="mdi-check-all" class="text-body-2 mt-3 mx-1" @click="true"></v-icon>
+                                                                <nuxt-link to="/inspecao"><v-icon icon="mdi-text-box-check" class="text-body-2 mt-3 mx-1" ></v-icon></nuxt-link>
                                                                 <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="true"></v-icon>
                                                         </div>
-
-                                                </v-card>
+                                   
+                                             
                                         </div>
                                         </div>
 
@@ -431,45 +372,29 @@ const elements = [
 
 const cards = ref([
 {
-        Modalidade: 'Mecânico',
-        Ordem: '0001',
-        Desc_Insp: 'Espaço reservado para descrição',
-        Data_inicio: '12-06-2024',
-        Data_fim: '25-06-2024',
-        Analista: 'Analista_01',
-        Inspetor: 'Inspetor_01'
-},
-{
-        Modalidade: 'Mecânico',
-        Ordem: '0002',
-        Desc_Insp: 'Espaço reservado para descrição',
-        Data_inicio: '13-06-2024',
-        Data_fim: '26-06-2024',
-        Analista: 'Analista_02',
-        Inspetor: 'Inspetor_02'
-},
-
-{
-        Modalidade: 'Mecânico',
-        Ordem: '0003',
-        Desc_Insp: 'Espaço reservado para descrição',
-        Data_inicio: '15-06-2024',
-        Data_fim: '25-06-2024',
-        Analista: 'Analista_03',
-        Inspetor: 'Inspetor_03'
-},
-
-{
-        Modalidade: 'Mecânico',
-        Ordem: '0004',
-        Desc_Insp: 'Espaço reservado para descrição',
-        Data_inicio: '11-06-2024',
-        Data_fim: '25-06-2024',
-        Analista: 'Analista_04',
-        Inspetor: 'Inspetor_04'
+        Modalidade: '',
+        Ordem: '',
+        Desc_Insp: '',
+        Data_inicio: '',
+        Data_fim: '',
+        Analista: '',
+        Inspetor: ''
 },
 
 ])
+
+
+
+const addCard = () => {
+  cards.value.push({
+    Modalidade: '',
+    Ordem: '',
+    Desc_Insp: '',
+    Data_inicio: '',
+    Data_fim: '',
+    Analista: '',
+    Inspetor: ''
+  })}
 
 
 const opcao = ref('')

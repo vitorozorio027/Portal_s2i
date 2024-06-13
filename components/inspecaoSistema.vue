@@ -6,8 +6,8 @@
             >
             <div
             style="position: relative; border: 1px solid black; "
-            class=" rounded  mx-auto mt-4 elevation-4 px-2 h-100"
-            ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Escopo/Avanço</p>
+            class=" rounded  mx-auto mt-4 px-2 h-100"
+            ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Inspeção Selecionada</p>
             
 
             </div>
@@ -20,7 +20,7 @@
             >
             <div
             style="position: relative; border: 1px solid black;"
-            class=" rounded  mx-auto mt-4 elevation-4 px-2 h-100"
+            class=" rounded  mx-auto mt-4  px-2 h-100"
             ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Escopo/Avanço</p>
             
     
@@ -47,43 +47,20 @@
                 <div
                 style="position: relative; border: 1px solid black; height: 400px"
                 class=" rounded  mx-auto mt-4 elevation-4 px-2"
-                ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Escopo/Avanço</p>
-                <div class="d-flex text-caption align-center justify-center">
+                ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Escopo</p>
+                <div class="d-flex text-caption w-100">
                     
-                    <div style="width: 60%;">
-                        <v-text-field
-                        prepend-inner-icon="mdi-magnify"
-                        single-line
-                        flat                       
-                        variant="outlined"
-                        rounded-lg
-                        placeholder="Pesquisar..."
-                        density="compact"
-                        class="mx-4 mt-12"
-                        v-model="procurar"
-                        ></v-text-field>    
+                    <div class="my-2 w-100">
+                            <v-icon icon="mdi-magnify"></v-icon>
+                            <input type="search" v-model="procurar" class="border mt-2 px-2 py-1 rounded text-caption w-50" placeholder="procurar...">
                     </div>
-                    <v-select
-                    v-model="procurar"
-                    :items="['Aguardando', 'Com anomalia', 'Sem anomalia', 'Indisponivel']"
-                    density="compact"
-                    variant="outlined"
-                    class=" mt-12"
-                    single-line
-                    label="selecione"
-                    return-object
-                    >
-                    <template v-slot:selection="{ item}">
-                        <span class="text-caption">{{ item.title }}</span>
-                    </template>
-                
-                    </v-select>
+                    
                 </div>  
                     <v-data-table-virtual
                     :items="elements"
                     :headers="headers"
                     :search="procurar"
-                    height="250"
+                    height="300"
                     show-select
                     hover
                     fixed-header
@@ -95,8 +72,16 @@
                     v-model="selectedPosicoesJson"
                     select-strategy="single"
                     >  
+                    <template v-slot:header.title="{ column }" >
+                            <p class="text-grey-lighten-1 text-caption"> {{ column.title }} </p>
+                    </template>
+                    <template v-slot:header.status="{ column }" >
+                            <p class="text-grey-lighten-1 text-caption "> {{ column.title }} </p>
+                    </template>
+
+
                     <template v-slot:item.title="{ value }">
-                            <div class="py-1 px-2 rounded border " style="font-size: 10px">
+                            <div  style="font-size: 10px">
                                     {{ value }}
                             </div>
                     </template>
@@ -124,7 +109,7 @@
             <div
             style="position: relative; border: 1px solid black; height: 400px"
             class=" rounded  mx-auto mt-4 elevation-4 px-2"
-            ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Escopo/Avanço</p>
+            ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Local Selecionado</p>
             <v-row>
                 <v-col cols="5">
                   
@@ -219,7 +204,7 @@ const headers= [
           key: 'title', 
              
         },
-        { title: 'status', key: 'status', width: "30%"},
+        { title: 'status', key: 'status', width: "30%", align: 'center',},
  ]
 
 const headersProgramacao= [
