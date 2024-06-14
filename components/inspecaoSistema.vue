@@ -153,23 +153,21 @@
 
                        
                         <v-row class="" >
-                            <v-col cols="6" v-if="selectedPosicoesJson[0].title">
+                            <v-col cols="6">
                             
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
                                 
-                                <input type="text" :value="selectedPosicoesJson[0].title" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
+                                <input type="text" :value="selectedPosicoesJson[0].title || ''" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
                             </v-col>
                             <v-spacer></v-spacer>
-                            <v-col cols="3" v-if="selectedPosicoesJson[0].title">
+                            <v-col cols="3" >
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Situação</p>
                                 <v-select
                                 v-model="Situacao"
                                 :items="['Com anomalia', 'Perfeitas Condições', 'Indisponivel']"
-                        
                                 density="compact"
                                 variant="outlined"
                                 size="x-small"
-                                
                                 >
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
@@ -180,13 +178,9 @@
                             <v-col cols="3" v-if="Situacao == 'Indisponivel'">
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Motivo Indisponibilidade</p>
                                 <v-select
-                            
                                 :items="['Inacessivel', 'Danificado', 'Negligencia']"
-                            
                                 density="compact"
                                 variant="outlined"
-
-                            
                                 >
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
@@ -200,14 +194,14 @@
 
 
                         <!--CAMPO RESULTADO-->
-                        <div class="bg-indigo-darken-4 mb-4" style="height: 220px" v-if="selectedPosicoesJson[0].title">
+                        <div class="bg-indigo-darken-4 mb-4" style="height: 220px" v-if="Situacao">
 
                         </div>
 
-                        <div class="text-end" v-if="selectedPosicoesJson[0].title">
-                            <v-btn variant="flat" color="grey">Inserir Foto</v-btn>
-                            <v-btn variant="flat" color="grey" class="mx-2">Registrar Anomalia</v-btn>
-                            <v-btn variant="flat"  color="indigo-darken-4" >Salvar</v-btn>
+                        <div class="text-end" v-if="Situacao">
+                            <v-btn variant="flat" color="grey" @click="dialog = true" v-if="Situacao != 'Com anomalia'">Inserir Foto</v-btn>
+                            <v-btn variant="flat" color="grey" v-if="Situacao == 'Com anomalia'">Registrar Anomalia</v-btn>
+                            <v-btn variant="flat"  color="indigo-darken-4" class="ml-2" >Salvar</v-btn>
                         </div>
                    
                     </div>
@@ -217,7 +211,39 @@
 
 
         <!--Modal-->
-        <v-dialog>
+        <v-dialog
+        v-model="dialog"
+        width="auto"
+        persistent
+        >
+            <v-card
+                width="400"
+                height="400"
+            >
+                <v-card-title
+                class="bg-indigo-darken-4"
+                >Registrar Evidência</v-card-title>
+
+                <v-card-item >
+                    <div class="border border-md mx-auto border-dashed d-flex justify-center align-center" style="height: 250px; width: 300px; position: relative;">
+                        <v-icon icon="mdi-file-image-plus" class="text-h4"></v-icon>
+                        <input
+                        type="file"
+                        accept="image/*"
+                        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0;"
+                        />
+                    </div>
+                </v-card-item>
+
+                <v-card-item >
+                    <hr>
+                    <div class="text-end mt-2">
+                        <v-btn size="small" variant="text" color="red" @click="dialog = false">Cancelar</v-btn>
+                        <v-btn size="small" class="ml-4" color="indigo-darken-4" variant="flat">Cancelar</v-btn>
+                    </div>
+                </v-card-item>
+
+            </v-card>
 
         </v-dialog>
 
@@ -244,7 +270,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-
+const dialog = ref (false)
 const procurar = ref('');
 const selectedPosicoesJson = ref([{"title": "", "status": ""}]);
 
