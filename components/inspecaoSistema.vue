@@ -149,10 +149,10 @@
                     class=" rounded  mx-auto mt-4 elevation-4 px-2"
                     ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Local Selecionado</p>
                         
-                    <div v-if="selectedPosicoesJson[0].title">
+               
 
                        
-                        <v-row class="">
+                        <v-row class="" v-if="selectedPosicoesJson[0].title">
                             <v-col cols="6">
                             
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
@@ -200,16 +200,16 @@
 
 
                         <!--CAMPO RESULTADO-->
-                        <div class="bg-indigo-darken-4 mb-4" style="height: 220px">
+                        <div class="bg-indigo-darken-4 mb-4" style="height: 220px" v-if="selectedPosicoesJson[0].title">
 
                         </div>
 
-                        <div class="text-end">
+                        <div class="text-end" v-if="selectedPosicoesJson[0].title">
                             <v-btn variant="flat" color="grey">Inserir Foto</v-btn>
                             <v-btn variant="flat" color="grey" class="mx-2">Registrar Anomalia</v-btn>
                             <v-btn variant="flat"  color="indigo-darken-4" >Salvar</v-btn>
                         </div>
-                    </div>
+                   
                     </div>
                 </v-col>
             </v-row>
@@ -217,6 +217,9 @@
 
 
         <!--Modal-->
+        <v-dialog>
+
+        </v-dialog>
 
 
 
