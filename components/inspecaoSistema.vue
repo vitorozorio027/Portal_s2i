@@ -152,15 +152,15 @@
                
 
                        
-                        <v-row class="" v-if="selectedPosicoesJson[0].title">
-                            <v-col cols="6">
+                        <v-row class="" >
+                            <v-col cols="6" v-if="selectedPosicoesJson[0].title">
                             
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
                                 
                                 <input type="text" :value="selectedPosicoesJson[0].title" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
                             </v-col>
                             <v-spacer></v-spacer>
-                            <v-col cols="3">
+                            <v-col cols="3" v-if="selectedPosicoesJson[0].title">
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Situação</p>
                                 <v-select
                                 v-model="Situacao"
