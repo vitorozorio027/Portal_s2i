@@ -6,9 +6,52 @@
             >
             <div
             style="position: relative; border: 1px solid black; "
-            class=" rounded  mx-auto mt-4 px-2 h-100"
+            class=" rounded  mx-auto mt-4 px-4 h-100 pt-4"
             ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Inspeção Selecionada</p>
-            
+                <v-row>
+                    <v-col cols="2">
+                        <div>
+                            <p style="font-size: 10px;" class="ml-2">Modalidade</p>
+                            <input type="text" style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                        </div>
+
+                    </v-col>
+                    <v-col cols="1">
+                        <div >
+                            <p style="font-size: 10px;" class="ml-2">Ordem</p>
+                            <input type="text"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                        </div>
+
+                    </v-col>
+                    <v-col cols="3">
+                        <div>
+                            <p style="font-size: 10px;" class="ml-2">Descrição da Inspeção</p>
+                            <input type="text"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                        </div>
+
+                    </v-col>
+                    <v-col cols="2">
+                        <div>
+                            <p style="font-size: 10px;" class="ml-2">Data Inicio</p>
+                            <input type="date"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                        </div>
+
+                    </v-col>
+                    <v-col cols="2">
+                        <div>
+                            <p style="font-size: 10px;" class="ml-2">Data Fim</p>
+                            <input type="date"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                        </div>
+
+                    </v-col>
+                    <v-col cols="2">
+                        <div>
+                            <p style="font-size: 10px;" class="text-center">status</p>
+                            <input type="text" style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                        </div>
+
+                    </v-col>
+                </v-row>
 
             </div>
     
@@ -72,12 +115,7 @@
                     v-model="selectedPosicoesJson"
                     select-strategy="single"
                     >  
-                    <template v-slot:header.title="{ column }" >
-                            <p class="text-grey-lighten-1 text-caption"> {{ column.title }} </p>
-                    </template>
-                    <template v-slot:header.status="{ column }" >
-                            <p class="text-grey-lighten-1 text-caption "> {{ column.title }} </p>
-                    </template>
+                 
 
 
                     <template v-slot:item.title="{ value }">
@@ -111,57 +149,62 @@
             class=" rounded  mx-auto mt-4 elevation-4 px-2"
             ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Local Selecionado</p>
             <v-row>
-                <v-col cols="5">
+                <v-col cols="6">
                   
-                    <p  class=" mt-6 ml-2 text-caption">Local</p>
-                    <v-text-field
-                        single-line
-                        flat                       
-                        variant="outlined"
-                        rounded-lg
-                        density="compact"
-                        readonly
-                       
-                       
-                        > </v-text-field>  
+                    <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
+                    
+                    <input type="text" :value="selectedPosicoesJson[0].title" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
                 </v-col>
-                <v-col cols="4">
-                    <p  class=" mt-6 ml-2 text-caption">Situação</p>
+                <v-spacer></v-spacer>
+                <v-col cols="3">
+                    <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Situação</p>
                     <v-select
                     v-model="Situacao"
                     :items="['Com anomalia', 'Perfeitas Condições', 'Indisponivel']"
-                    single-line
-                    label="selecione"
+               
                     density="compact"
                     variant="outlined"
+                    size="x-small"
                     
                     >
                     <template v-slot:selection="{ item}">
-                        <span class="text-caption">{{ item.title }}</span>
+                        <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
                     </template>
                 
                     </v-select>
                 </v-col>
                 <v-col cols="3" v-if="Situacao == 'Indisponivel'">
-                    <p  class=" mt-6 ml-2 text-caption">Situação</p>
+                    <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Motivo Indisponibilidade</p>
                     <v-select
                  
                     :items="['Inacessivel', 'Danificado', 'Negligencia']"
-                    single-line
-                    label="selecione"
+                  
                     density="compact"
                     variant="outlined"
 
                    
                     >
                     <template v-slot:selection="{ item}">
-                        <span class="text-caption">{{ item.title }}</span>
+                        <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
                     </template>
                 
                     </v-select>
                     
                 </v-col>
             </v-row>
+
+
+
+            <!--CAMPO RESULTADO-->
+            <div class="bg-indigo-darken-4 mb-4" style="height: 220px">
+
+            </div>
+
+            <div class="text-end">
+                <v-btn variant="flat" color="grey">Inserir Foto</v-btn>
+                <v-btn variant="flat" color="grey" class="mx-2">Registrar Anomalia</v-btn>
+                <v-btn variant="flat"  color="indigo-darken-4" >Salvar</v-btn>
+            </div>
 
             </div>
             </v-col>
@@ -190,12 +233,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-const select = ref('')
 
 const procurar = ref('');
-const selectedPosicoesJson = ref([{"title": "Espaço reservado para os Locais s2i-PO00011", "status": "Aguardando"}]);
+const selectedPosicoesJson = ref([{"title": "", "status": ""}]);
 
-//const selectedPosicoes = ref(JSON.parse(selectedPosicoesJson.value));
 const Situacao = ref('')
 const headers= [
         {
@@ -207,6 +248,7 @@ const headers= [
         { title: 'status', key: 'status', width: "30%", align: 'center',},
  ]
 
+
 const headersProgramacao= [
         {
           title: '',
@@ -215,6 +257,7 @@ const headersProgramacao= [
         },
         { title: '', key: 'actions', align: 'center'},
 ]
+
 
 const elements = [
     {title: 'Espaço reservado para os Locais s2i-PO00001', status: 'Aguardando'},

@@ -45,11 +45,11 @@
                                                 <div class="d-flex  font-weight-bold mb-2" style="font-size: 10px;">
                                                         <p style="width: 10%;" class="ml-2">Modalidade</p>
                                                         <p style="width: 5%;" class="ml-2">Ordem</p>
-                                                        <p style="width: 17%;" class="ml-2">Descrição da Inspeção</p>
+                                                        <p style="width: 20%;" class="ml-2">Descrição da Inspeção</p>
                                                         <p style="width: 9%;" class="ml-2">Data inicio</p>
                                                         <p style="width: 9%;" class="ml-2">Data fim</p>
-                                                        <p style="width: 10%;" class="ml-2">Analista</p>
-                                                        <p style="width: 10%;" class="ml-2">Inspetor</p>
+                                                        <p style="width: 9%;" class="ml-2">Analista</p>
+                                                        <p style="width: 9%;" class="ml-2">Inspetor</p>
                                                         <p style="width: 7%;" class="ml-2">Escopo</p>
                                                         <p style="width: 7%;">Recurso</p>
                                                         <p>status</p>
