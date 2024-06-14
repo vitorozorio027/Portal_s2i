@@ -138,77 +138,85 @@
 
 
 
-            <v-spacer></v-spacer>
+                 <v-spacer></v-spacer>
 
-            <v-col cols="7"
-            class="pa-2"
-            >
-            
-            <div
-            style="position: relative; border: 1px solid black; height: 400px"
-            class=" rounded  mx-auto mt-4 elevation-4 px-2"
-            ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Local Selecionado</p>
-            <v-row>
-                <v-col cols="6">
-                  
-                    <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
-                    
-                    <input type="text" :value="selectedPosicoesJson[0].title" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
-                </v-col>
-                <v-spacer></v-spacer>
-                <v-col cols="3">
-                    <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Situação</p>
-                    <v-select
-                    v-model="Situacao"
-                    :items="['Com anomalia', 'Perfeitas Condições', 'Indisponivel']"
-               
-                    density="compact"
-                    variant="outlined"
-                    size="x-small"
-                    
-                    >
-                    <template v-slot:selection="{ item}">
-                        <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
-                    </template>
+                <v-col cols="7"
+                class="pa-2"
+                >
                 
-                    </v-select>
-                </v-col>
-                <v-col cols="3" v-if="Situacao == 'Indisponivel'">
-                    <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Motivo Indisponibilidade</p>
-                    <v-select
-                 
-                    :items="['Inacessivel', 'Danificado', 'Negligencia']"
-                  
-                    density="compact"
-                    variant="outlined"
+                    <div
+                    style="position: relative; border: 1px solid black; height: 400px"
+                    class=" rounded  mx-auto mt-4 elevation-4 px-2"
+                    ><p style="position: absolute;  top: -10px; z-index: 1; left: 20px;" class="bg-white px-2 text-caption">Relatar Local Selecionado</p>
+                        
+                    <div v-if="selectedPosicoesJson[0].title">
 
-                   
-                    >
-                    <template v-slot:selection="{ item}">
-                        <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
-                    </template>
-                
-                    </v-select>
-                    
+                       
+                        <v-row class="">
+                            <v-col cols="6">
+                            
+                                <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
+                                
+                                <input type="text" :value="selectedPosicoesJson[0].title" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
+                            </v-col>
+                            <v-spacer></v-spacer>
+                            <v-col cols="3">
+                                <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Situação</p>
+                                <v-select
+                                v-model="Situacao"
+                                :items="['Com anomalia', 'Perfeitas Condições', 'Indisponivel']"
+                        
+                                density="compact"
+                                variant="outlined"
+                                size="x-small"
+                                
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                            
+                                </v-select>
+                            </v-col>
+                            <v-col cols="3" v-if="Situacao == 'Indisponivel'">
+                                <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Motivo Indisponibilidade</p>
+                                <v-select
+                            
+                                :items="['Inacessivel', 'Danificado', 'Negligencia']"
+                            
+                                density="compact"
+                                variant="outlined"
+
+                            
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                            
+                                </v-select>
+                                
+                            </v-col>
+                        </v-row>
+
+
+
+                        <!--CAMPO RESULTADO-->
+                        <div class="bg-indigo-darken-4 mb-4" style="height: 220px">
+
+                        </div>
+
+                        <div class="text-end">
+                            <v-btn variant="flat" color="grey">Inserir Foto</v-btn>
+                            <v-btn variant="flat" color="grey" class="mx-2">Registrar Anomalia</v-btn>
+                            <v-btn variant="flat"  color="indigo-darken-4" >Salvar</v-btn>
+                        </div>
+                    </div>
+                    </div>
                 </v-col>
             </v-row>
 
 
 
-            <!--CAMPO RESULTADO-->
-            <div class="bg-indigo-darken-4 mb-4" style="height: 220px">
-
-            </div>
-
-            <div class="text-end">
-                <v-btn variant="flat" color="grey">Inserir Foto</v-btn>
-                <v-btn variant="flat" color="grey" class="mx-2">Registrar Anomalia</v-btn>
-                <v-btn variant="flat"  color="indigo-darken-4" >Salvar</v-btn>
-            </div>
-
-            </div>
-            </v-col>
-        </v-row>
+        <!--Modal-->
 
 
 
