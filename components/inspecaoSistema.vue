@@ -125,9 +125,38 @@
                     </template>
 
                     <template v-slot:item.status="{ value }">
-                            <div class="py-1 px-2 rounded border text-center" style="font-size: 10px">
-                                    {{ value }}
-                            </div>
+                       
+
+                            <v-chip
+                            size="x-small"
+                            label
+                            v-if="value == 'Aguardando'"
+                            
+                            >
+                            {{ value }}
+                            </v-chip>
+
+                            <v-chip
+                            size="x-small"
+                            label
+                            v-if="value == 'Sem anomalia'"
+                            color="teal-darken-4"
+                            variant="flat"
+                            >
+                            {{ value }}
+                            </v-chip>
+
+                            <v-chip
+                            size="x-small"
+                            label
+                            v-if="value == 'Indisponivel'"
+                            color="blue-grey-lighten-1"
+                            variant="flat"
+                            >
+                            {{ value }}
+                            </v-chip>
+
+
                     </template>
                             
                     </v-data-table-virtual> 
@@ -157,11 +186,11 @@
                             
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
                                 
-                                <input type="text" :value="selectedPosicoesJson[0].title || ''" style="font-size: 10px" class="w-100 border pa-3 rounded font-weight-black" readonly> 
+                                <input type="text"  style="font-size: 10px;" class="w-100 border pa-3 rounded " readonly :value="ProgramacaoLocal"> 
                             </v-col>
                             <v-spacer></v-spacer>
-                            <v-col cols="3" >
-                                <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Situação</p>
+                            <v-col cols="3" v-if="ProgramacaoLocal!=='Aguardando Seleção...'">
+                                <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;" >Situação</p>
                                 <v-select
                                 v-model="Situacao"
                                 :items="['Com anomalia', 'Perfeitas Condições', 'Indisponivel']"
@@ -194,14 +223,16 @@
 
 
                         <!--CAMPO RESULTADO-->
-                        <div class="bg-indigo-darken-4 mb-4" style="height: 220px" v-if="Situacao">
-
+                        <div class=" mb-4" style="height: 220px" v-if="Situacao">
+                     
+                                
+                          
                         </div>
 
                         <div class="text-end" v-if="Situacao">
-                            <v-btn variant="flat" color="grey" @click="dialog = true" v-if="Situacao != 'Com anomalia'">Inserir Foto</v-btn>
+                            <v-btn variant="flat" color="grey" @click="dialog = true" v-if="Situacao == 'Perfeitas Condições'">Inserir Foto</v-btn>
                             <v-btn variant="flat" color="grey" v-if="Situacao == 'Com anomalia'">Registrar Anomalia</v-btn>
-                            <v-btn variant="flat"  color="indigo-darken-4" class="ml-2" >Salvar</v-btn>
+                            <v-btn variant="flat"  color="indigo-darken-4" class="ml-2">Salvar</v-btn>
                         </div>
                    
                     </div>
@@ -226,12 +257,25 @@
 
                 <v-card-item >
                     <div class="border border-md mx-auto border-dashed d-flex justify-center align-center" style="height: 250px; width: 300px; position: relative;">
-                        <v-icon icon="mdi-file-image-plus" class="text-h4"></v-icon>
+                        
+                        <v-img
+                        v-if="imageUrl"
+                        :src="imageUrl"
+                        height="300"
+                        width="250"
+                        contain
+                        class="my-4"
+                        ></v-img>
+                        <v-icon icon="mdi-file-image-plus" class="text-h4" v-else></v-icon>
                         <input
                         type="file"
                         accept="image/*"
+                        @change="onFileChange"
                         style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0;"
+                        class="hover-foto"
                         />
+                        
+                       
                     </div>
                 </v-card-item>
 
@@ -239,7 +283,7 @@
                     <hr>
                     <div class="text-end mt-2">
                         <v-btn size="small" variant="text" color="red" @click="dialog = false">Cancelar</v-btn>
-                        <v-btn size="small" class="ml-4" color="indigo-darken-4" variant="flat">Cancelar</v-btn>
+                        <v-btn size="small" class="ml-4" color="indigo-darken-4" variant="flat">Salvar</v-btn>
                     </div>
                 </v-card-item>
 
@@ -256,44 +300,20 @@
 </template>
 
 
-<style>
-        input:focus {
-        box-shadow: 0 0 0 0;
-        outline: 0;
-        }
-
-</style>
-
-
-
-
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, watch } from 'vue';
 
 const dialog = ref (false)
 const procurar = ref('');
-const selectedPosicoesJson = ref([{"title": "", "status": ""}]);
-
+const ProgramacaoLocal = ref('Aguardando Seleção...')
+const selectedPosicoesJson  = ref(null)
 const Situacao = ref('')
+const imageUrl = ref(null)
+
 const headers= [
-        {
-          title: 'Locais',
-          align: 'start',
-          key: 'title', 
-             
-        },
+        {title: 'Locais', align: 'start', key: 'title',   },
         { title: 'status', key: 'status', width: "30%", align: 'center',},
  ]
-
-
-const headersProgramacao= [
-        {
-          title: '',
-          align: 'center',
-          key: 'title',      
-        },
-        { title: '', key: 'actions', align: 'center'},
-]
 
 
 const elements = [
@@ -330,4 +350,39 @@ const elements = [
 ];
 
 
+const onFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      imageUrl.value = e.target.result
+    }
+    reader.readAsDataURL(file)
+  }
+}
+
+
+watch(selectedPosicoesJson, (newValue) => {
+    Situacao.value = '';
+    ProgramacaoLocal.value = 'Aguardando Seleção...';
+    imageUrl.value = null;
+  if (newValue.length>0) {
+    ProgramacaoLocal.value = newValue[0].title
+    return
+  }
+})
+
 </script>
+
+
+<style>
+        input:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+        }
+
+        .hover-foto:hover{
+            cursor: pointer;
+        }
+
+</style>

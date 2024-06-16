@@ -32,7 +32,14 @@
           <div class="w-75" ><hr></div>
         </div>
 
+        <v-list-item
+        prepend-icon="mdi-account-multiple-plus"
+        class="text-caption"
         
+        >
+        <v-btn variant="plain" text="Usuarios" class="text-caption font-weight-regular" to="/usuarios"></v-btn>
+      </v-list-item>
+
         <v-list-item
         prepend-icon="mdi-lan"
         class="text-caption"
@@ -40,7 +47,7 @@
         >
         <v-btn variant="plain" text="Cadstro de Sistema" class="text-caption font-weight-regular" to="/sistemas"></v-btn>
       </v-list-item>
-
+      
         
 
 
@@ -55,7 +62,7 @@
 
 
       <div class="d-flex  align-center pl-4 my-4"  >
-          <div class="w-auto mr-4 font-weight-black " style="font-size: 12px;" >Usuários</div>
+          <div class="w-auto mr-4 font-weight-black " style="font-size: 12px;" >Check-list de Inspeção</div>
           <div class="w-75" ><hr></div>
         </div>
 
@@ -78,7 +85,7 @@
 
 
       <div class="d-flex  align-center pl-4 mb-2 mt-4"  >
-          <div class="w-auto mr-4 font-weight-black " style="font-size: 12px;" >Check-list de Inspeção</div>
+          <div class="w-auto mr-4 font-weight-black " style="font-size: 12px;" >Relatório</div>
           <div class="w-75" ><hr></div>
         </div>
 
@@ -88,7 +95,7 @@
           class="text-caption"
           
         >
-        <v-list-title><v-btn variant="plain"  class="text-caption font-weight-regular" to="/inspecao">Inspeção</v-btn></v-list-title>
+        <v-list-title><v-btn variant="plain"  class="text-caption font-weight-regular" >Inspeção</v-btn></v-list-title>
       </v-list-item>
 
       <v-list-item
@@ -126,7 +133,6 @@ watch(() => TitlePages.pageTitle, (newTitle) => {
 const drawer = ref(false)
 
 const links = [
-  ['mdi-pen-plus', 'Cadastrar', '/cadastroUsuarios'],
   ['mdi-book-edit', 'Programação Rota', '/programacao']
 ]
 

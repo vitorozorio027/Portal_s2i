@@ -126,7 +126,7 @@
                                                         <div>
                                                                 <v-icon icon="mdi-magnify" class="text-body-2 mt-3" @click="true"></v-icon>
                                                                 <nuxt-link to="/inspecao"><v-icon icon="mdi-text-box-check" class="text-body-2 mt-3 mx-1" ></v-icon></nuxt-link>
-                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="true"></v-icon>
+                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="removerProgramacao(i)"></v-icon>
                                                         </div>
                                    
                                              
@@ -231,7 +231,6 @@
                                                                                 :items="selectedProgramacao"
                                                                                 :headers="headersProgramacao"
                                                                                 height="150"
-                                                                        
                                                                                 :search="procurarProgramacao"
                                                                                 hover
                                                                                 fixed-header
@@ -242,8 +241,8 @@
                                                                         
                                                                                 
                                                                                 >  
-                                                                                        <template v-slot:item.actions="{ value }">
-                                                                                                <v-icon icon="mdi-trash-can" @click="dialog = true" ></v-icon>
+                                                                                        <template v-slot:item.actions="{ item }">
+                                                                                                <v-icon icon="mdi-trash-can" @click="removerProgramacaoSelecionada(item)" ></v-icon>
                                                                                         </template>
                                                                                         
                                                                                 </v-data-table-virtual> 
@@ -370,18 +369,7 @@ const elements = [
 
 
 
-const cards = ref([
-{
-        Modalidade: '',
-        Ordem: '',
-        Desc_Insp: '',
-        Data_inicio: '',
-        Data_fim: '',
-        Analista: '',
-        Inspetor: ''
-},
-
-])
+const cards = ref([])
 
 
 
@@ -412,6 +400,16 @@ const abrirModal = (op) => {
     
 }
 
+const removerProgramacao = (index) => {
+        cards.value.splice(index, 1)
+}
+
+const removerProgramacaoSelecionada = (item) => {
+  const index = selectedProgramacao.value.findIndex((element) => element.title === item.title)
+  if (index !== -1) {
+    selectedProgramacao.value.splice(index, 1)
+  }
+}
 
 
 </script>
