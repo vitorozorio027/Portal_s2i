@@ -230,8 +230,8 @@
                         </div>
 
                         <div class="text-end" v-if="Situacao">
-                            <v-btn variant="flat" color="grey" @click="dialog = true" v-if="Situacao == 'Perfeitas Condições'">Inserir Foto</v-btn>
-                            <v-btn variant="flat" color="grey" v-if="Situacao == 'Com anomalia'">Registrar Anomalia</v-btn>
+                            <v-btn variant="flat" color="grey" @click="abrirModal('perfeitas condicoes')" v-if="Situacao == 'Perfeitas Condições'">Inserir Foto</v-btn>
+                            <v-btn variant="flat" color="grey" v-if="Situacao == 'Com anomalia'" @click="abrirModal('anomalia')" >Registrar Anomalia</v-btn>
                             <v-btn variant="flat"  color="indigo-darken-4" class="ml-2">Salvar</v-btn>
                         </div>
                    
@@ -247,9 +247,169 @@
         width="auto"
         persistent
         >
+
+        <v-card
+            width="500"
+            height="700"
+            v-if="opcao=='anomalia'"
+            >
+                <v-card-title
+                class="bg-indigo-darken-4"
+                >Registro de Anomalia</v-card-title>
+                
+                <v-card-item>
+                    <v-row dense>
+                        <v-col cols="8">
+                            <span class="text-caption ml-2">Local</span>
+                            <input type="text" readonly class="border rounded px-2 py-1 w-100">
+                        </v-col>
+                        <v-spacer></v-spacer>
+                        <v-col cols="4">
+                            <span class="text-caption ml-2">Modalidade</span>
+                            <input type="text" readonly class="border rounded px-2 py-1 w-100">
+                        </v-col>
+                    </v-row>
+                    <!--inspeção e foto-->
+                    <v-row dense > 
+                        <v-col cols="6" >
+                            <div style="height: 280px; overflow-y: auto" class="hiddenscrool">
+
+                            
+                            <div class="w-50 pa-0">
+                                <p class=" ml-2 " style="font-size: 10px;">Técnica</p>
+                                <v-select
+                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                                </v-select>
+                            </div>
+
+                            <div class="w-50 pa-0">
+                                <p class=" ml-2 " style="font-size: 10px;">Status</p>
+                                <v-select
+                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                                </v-select>
+
+                            </div>
+                            <div class="w-75 pa-0">
+                                <p class=" ml-2 " style="font-size: 10px;">Ponto</p>
+                                <v-select
+                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                                </v-select>
+
+                            </div>
+                            <div class="w-75 pa-0">
+                                <p class=" ml-2 " style="font-size: 10px;">Sintoma</p>
+                                <v-select
+                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                                </v-select>
+
+                            </div>
+                            <div class="w-75 pa-0">
+                                <p class=" ml-2 " style="font-size: 10px;">Recomendação</p>
+                                <v-select
+                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                                </v-select>
+
+                            </div>
+
+                            <div class="w-50 pa-0">
+                                <p class=" ml-2 " style="font-size: 10px;">Prazo (dias)</p>
+                                <v-select
+                                :items="['10 dias', '21 dias', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                </template>
+                                </v-select>
+                            </div>
+                        </div>
+                        </v-col>
+
+                        <v-spacer></v-spacer>
+                        <v-col cols="6" >
+                            <div style="height: 280px;" class="d-flex justify-center align-center" >
+                                <div class="w-100 border border-md border-dashed d-flex justify-center align-center flex-column" style="height: 230px;">
+                                    <v-icon icon="mdi-image-plus-outline" class="text-h4"></v-icon>
+                                    <p class="text-caption font-weight-thin text-disabled">Anexar imagem aqui</p>
+                                </div>
+                            </div>
+                          
+                        </v-col>
+                    </v-row>
+
+
+                    <v-row dense>
+                        <v-col cols="12">
+                            <span class="ml-2" style="font-size: 10px;">Detalhes Adicionais</span>
+                            <input type="text"  class="border rounded px-2 py-1 w-100">
+                        </v-col>
+                    </v-row>
+                </v-card-item>
+
+
+
+
+
+                <v-card-item >
+                    <hr>
+                    <div class="text-end mt-1">
+                        <v-btn size="small" variant="text" color="red" @click="dialog = false">Cancelar</v-btn>
+                        <v-btn size="small" class="ml-4" color="indigo-darken-4" variant="flat">Salvar</v-btn>
+                    </div>
+                </v-card-item>
+
+
+            </v-card>
+
+
+
             <v-card
                 width="400"
                 height="400"
+                v-else
             >
                 <v-card-title
                 class="bg-indigo-darken-4"
@@ -309,7 +469,7 @@ const ProgramacaoLocal = ref('Aguardando Seleção...')
 const selectedPosicoesJson  = ref(null)
 const Situacao = ref('')
 const imageUrl = ref(null)
-
+const opcao = ref('')
 const headers= [
         {title: 'Locais', align: 'start', key: 'title',   },
         { title: 'status', key: 'status', width: "30%", align: 'center',},
@@ -372,6 +532,12 @@ watch(selectedPosicoesJson, (newValue) => {
   }
 })
 
+const abrirModal = (op) => {
+      opcao.value = op;
+    dialog.value = true;
+}
+
+
 </script>
 
 
@@ -383,6 +549,9 @@ watch(selectedPosicoesJson, (newValue) => {
 
         .hover-foto:hover{
             cursor: pointer;
+        }
+        .hiddenscrool::-webkit-scrollbar { 
+	        display: none;
         }
 
 </style>
