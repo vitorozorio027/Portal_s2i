@@ -115,10 +115,10 @@
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
                                                         </div>
                                                         <div  class="mt-2 mx-2">
-                                                                <v-btn size="x-small" style="font-size: 9px;" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
+                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
                                                         </div>
                                                         <div  class="mt-2 ">
-                                                                <v-btn size="x-small" style="font-size: 9px;"  variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
+                                                                <v-btn size="x-small" class="text-caption"  variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
                                                         </div>
                                                         <div style="width: 5%;" class="mx-1">
                                                                 <input type="text" style="font-size: 10px;" class="border border-sm w-100 px-1 pt-2 pb-3 rounded text-red text-center " value="Pendente">
