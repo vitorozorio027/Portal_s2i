@@ -58,7 +58,7 @@
         class="mb-8"
         color="indigo-darken-4"
         size="large"
-        to="/usuarios"
+        to="/Dashboard"
         block
       >
         Iniciar a Sessão

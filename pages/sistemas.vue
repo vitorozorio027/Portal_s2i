@@ -21,6 +21,7 @@ const TitlePages = useTitlePagesStore()
 
 onMounted(() => {
   TitlePages.setPageTitle('MCI - Cadastro de Sistemas');
+  TitlePages.setDrawerState(true)
 });
 
 </script>

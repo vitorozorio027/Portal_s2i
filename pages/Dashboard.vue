@@ -2,11 +2,13 @@
     <div >
       <v-container>
         <v-main>
-          <usuarios />
+          <div>
+            <dashboard-infocards />
+            <dashboard-grafico />
+            <dashboard-tabela />
+          </div>
         </v-main>
-        
       </v-container>
-        
     </div>
 </template>
 
@@ -18,10 +20,10 @@ definePageMeta({
 });
 
 const TitlePages = useTitlePagesStore()
-
+const nome = ref('João Pedro')
 onMounted(() => {
-  TitlePages.setPageTitle('MCI - Cadastro de Usuários');
-  TitlePages.setDrawerState(true)
+  TitlePages.setPageTitle(`${nome.value}, Empresa 1`);
+  TitlePages.setDrawerState(false)
 });
 </script>
 

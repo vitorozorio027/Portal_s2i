@@ -49,9 +49,9 @@
                                                         <p style="width: 9%;" class="ml-2">Data inicio</p>
                                                         <p style="width: 9%;" class="ml-2">Data fim</p>
                                                         <p style="width: 9%;" class="ml-2">Analista</p>
-                                                        <p style="width: 9%;" class="ml-2">Inspetor</p>
-                                                        <p style="width: 7%;" class="ml-2">Escopo</p>
-                                                        <p style="width: 7%;">Recurso</p>
+                                                        <p style="width: 8%;" class="ml-2">Inspetor</p>
+                                                        <p style="width: 6%;" class="ml-2">Escopo</p>
+                                                        <p style="width: 6%;">Recurso</p>
                                                         <p>status</p>
                                                 </div>
 
@@ -115,18 +115,18 @@
                                                                 <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
                                                         </div>
                                                         <div  class="mt-2 mx-2">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
+                                                                <v-btn size="x-small" style="font-size: 9px;" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
                                                         </div>
                                                         <div  class="mt-2 ">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
+                                                                <v-btn size="x-small" style="font-size: 9px;"  variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
                                                         </div>
-                                                        <div style="width: 6%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-1 pt-2 pb-3 rounded text-red text-center" value="Pendente">
+                                                        <div style="width: 5%;" class="mx-1">
+                                                                <input type="text" style="font-size: 10px;" class="border border-sm w-100 px-1 pt-2 pb-3 rounded text-red text-center " value="Pendente">
                                                         </div>
-                                                        <div>
-                                                                <v-icon icon="mdi-magnify" class="text-body-2 mt-3" @click="true"></v-icon>
+                                                        <div class="d-flex justify-center  ">
+                                                                <v-icon icon="mdi-magnify" class="text-body-2 mt-3 d-none d-lg-block" @click="true"></v-icon>
                                                                 <nuxt-link to="/inspecao"><v-icon icon="mdi-text-box-check" class="text-body-2 mt-3 mx-1" ></v-icon></nuxt-link>
-                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 " @click="removerProgramacao(i)"></v-icon>
+                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 d-none d-lg-block" @click="removerProgramacao(i)"></v-icon>
                                                         </div>
                                    
                                              
