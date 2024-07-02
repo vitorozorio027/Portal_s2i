@@ -10,7 +10,7 @@
                                                 <v-text-field
                                                 :loading="loading"
                                                 append-inner-icon="mdi-magnify"
-                                                density="compact"
+                                                density="comfortable"
                                                 label="Pesquisar"
                                                 variant="solo"
                                                 hide-details
@@ -43,16 +43,16 @@
                                 <!--SECÇÃO PLANEJAMENTO-->
                                         <div style="height: 370px; overflow-y: auto">
                                                 <div class="d-flex  font-weight-bold mb-2" style="font-size: 10px;">
-                                                        <p style="width: 10%;" class="ml-2">Modalidade</p>
-                                                        <p style="width: 5%;" class="ml-2">Ordem</p>
-                                                        <p style="width: 20%;" class="ml-2">Descrição da Inspeção</p>
+                                                        <p style="width: 9%;" class="ml-2">Modalidade</p>
+                                                        <p style="width: 6%;" class="ml-2">Ordem</p>
+                                                        <p style="width: 25%;" class="ml-2">Descrição da Inspeção</p>
                                                         <p style="width: 9%;" class="ml-2">Data inicio</p>
                                                         <p style="width: 9%;" class="ml-2">Data fim</p>
                                                         <p style="width: 9%;" class="ml-2">Analista</p>
-                                                        <p style="width: 8%;" class="ml-2">Inspetor</p>
-                                                        <p style="width: 6%;" class="ml-2">Escopo</p>
-                                                        <p style="width: 6%;">Recurso</p>
-                                                        <p>status</p>
+                                                        <p style="width: 6%;" class="ml-2">Inspetor</p>
+                                                        <p class="ml-4">Escopo</p>
+                                                        <p class="ml-2">Recurso</p>
+                                                        <p class="ml-7">status</p>
                                                 </div>
 
 
@@ -65,68 +65,73 @@
                                                  <!--SECÃO DE CARD-->
 
                                       
-                                                <div class="d-flex px-1 mb-2 elevation-2 rounded border pt-2" 
+                                                <div class="d-flex px-1 mb-2 elevation-2 rounded border align-center" 
                                                  v-for="(card, i ) in cards"
                                                  :key="i"
+                                                 style="height: 45px;"
                                                 >
 
                                                     
-                                                        <div style="width: 10%; height: 50px;"  >
+                                                        <div style="width: 8%;"  class="mt-5">
                                                                 <v-select
                                                                 variant="outlined"
                                                                 density="compact"
                                                                 :items="['Mecânico', 'Elétrico']"
-                                                             
                                                                 flat
-                                                             
                                                                 >
                                                                         <template v-slot:selection="{ item }">
-                                                                                <v-chip 
-                                                                                variant="text"   
-                                                                                density="comfortable" size="x-small"                                                                  
-                                                                                >
-                                                                                        {{ item.title }}
-                                                                                </v-chip>
+                                                                        <span style="font-size: 10px;">{{ item.title }}</span>
                                                                         </template> 
                                                                 </v-select>
+
                                                         </div>
 
 
-                                                        <div style="width: 4%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded" :value="card.Ordem">
+                                                        <div style="width: 6%;" class="mx-2">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded" :value="card.Ordem">
                                                         </div>
 
                                                         
-                                                        <div style="width: 20%;" class="">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded" :value="card.Desc_Insp">
+                                                        <div style="width: 25%;" class="">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded" :value="card.Desc_Insp">
                                                         </div>
 
                                                         <div style="width: 9%;" class="mx-2">
-                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
                                                         </div>
 
                                                         <div style="width: 9%;" class="">
-                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
                                                         </div>
                                                         <div style="width: 9%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
                                                         </div>
                                                         <div style="width: 9%;" class="">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-3 pb-2 rounded">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
                                                         </div>
-                                                        <div  class="mt-2 mx-2">
-                                                                <v-btn size="x-small" class="text-caption" variant="tonal" @click="abrirModal('escopo')">--selecione</v-btn>
+                                                        <div  class=" mx-2">
+                                                                <v-icon
+                                                                icon="mdi-database-search"
+                                                                class="text-h6 mr-4"
+                                                                @click="abrirModal('escopo')"
+                                                                ></v-icon>
+                                                                
                                                         </div>
-                                                        <div  class="mt-2 ">
-                                                                <v-btn size="x-small" class="text-caption"  variant="tonal" @click="abrirModal('recurso')">--selecione</v-btn>
+                                                        <div  class=" ">
+                                                                <v-icon
+                                                                icon="mdi-cogs"
+                                                                class="text-h6"
+                                                                @click="abrirModal('recurso')"
+                                                                ></v-icon>
+                                                              
                                                         </div>
-                                                        <div style="width: 5%;" class="mx-1">
-                                                                <input type="text" style="font-size: 10px;" class="border border-sm w-100 px-1 pt-2 pb-3 rounded text-red text-center " value="Pendente">
+                                                        <div style="width: 5%;" class="mx-4">
+                                                                <input type="text" style="font-size: 10px;" class="border border-sm w-100 px-1 py-1 rounded  text-center" value="Pendente">
                                                         </div>
-                                                        <div class="d-flex justify-center  ">
-                                                                <v-icon icon="mdi-magnify" class="text-body-2 mt-3 d-none d-lg-block" @click="true"></v-icon>
-                                                                <nuxt-link to="/inspecao"><v-icon icon="mdi-text-box-check" class="text-body-2 mt-3 mx-1" ></v-icon></nuxt-link>
-                                                                <v-icon icon="mdi-trash-can" class="text-body-2 mt-3 d-none d-lg-block" @click="removerProgramacao(i)"></v-icon>
+                                                        <div class="d-flex justify-center align-center ">
+                                                                <v-icon icon="mdi-magnify" class="text-body-2 d-none d-lg-block" @click="true"></v-icon>
+                                                                <nuxt-link to="/inspecao" ><v-icon icon="mdi-text-box-check" class="text-body-2  d-block" ></v-icon></nuxt-link>
+                                                                <v-icon icon="mdi-trash-can" class="text-body-2 d-none d-lg-block" @click="removerProgramacao(i)"></v-icon>
                                                         </div>
                                    
                                              
@@ -414,13 +419,23 @@ const removerProgramacaoSelecionada = (item) => {
 
 </script>
 
-
-
-<style>
+<style scoped>
 input:focus {
 box-shadow: 0 0 0 0;
 outline: 0;
 }
 
-        
+.v-field.v-field--appended {
+    --v-field-padding-end: 0px;
+}
+.v-input--density-compact .v-field--variant-outlined, .v-input--density-compact 
+.v-field--single-line, .v-input--density-compact .v-field--no-label {
+    --v-field-padding-bottom: 0px;
+}
+
+.v-input--density-compact {
+    --v-input-control-height: 0px !important;
+    --v-input-padding-top: 0px !important;
+}
+
 </style>

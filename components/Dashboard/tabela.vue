@@ -11,16 +11,19 @@
                     </v-col>
                     <v-spacer></v-spacer>
                     <v-col cols="4">
-                        <v-text-field
+                        <div
+                        class="border rounded px-1 hoverfiltro"
+                        >
+                        <v-icon icon="mdi-magnify" class="text-caption"></v-icon>
+                        <input 
                         v-model="search"
-                        label="Filtrar"
-                        prepend-inner-icon="mdi-magnify"
-                        variant="outlined"
-                        hide-details
-                        single-line
-                        density="compact"
-                        class="text-caption"
-                        ></v-text-field>
+                        class="text-caption pa-1"
+                        placeholder="Filtrar"
+                        style="width: 90%;"
+                        >
+                        
+                        </div>
+                        
                     </v-col>
                 </v-row> 
 
@@ -31,11 +34,11 @@
                 :headers="headers"
                 :items="[]"
                 :search="search"
-                height="400"
+                max-height="400"
                 hover
                 fixed-header
                 density="compact"
-                class="text-caption mt-10"
+                class="text-caption my-10"
                 no-data-text="Sem Locais Cadastrados !"
                 >
                 
@@ -87,9 +90,7 @@
                 </template>
 
                 </v-data-table-virtual>
-            </v-card>
-    
-
+            </v-card>  
     </div>
 </template>
 
@@ -125,3 +126,9 @@ const headers = [
 
 
 </script>
+
+<style>
+.hoverfiltro:hover{
+    cursor: pointer;
+}
+</style>

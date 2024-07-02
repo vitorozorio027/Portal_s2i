@@ -16,7 +16,7 @@
       <div class="text-subtitle-1 text-medium-emphasis">E-mail</div>
 
       <v-text-field
-        density="compact"
+        density="comfortable"
         placeholder="Endereço de e-mail"
         prepend-inner-icon="mdi-email-outline"
         variant="outlined"
@@ -37,7 +37,7 @@
       <v-text-field
         :append-inner-icon="visible ? 'mdi-eye' :  'mdi-eye-off'"
         :type="visible ? 'text' : 'password'"
-        density="compact"
+        density="comfortable"
         placeholder="Entre com a sua senha"
         prepend-inner-icon="mdi-lock-outline"
         variant="outlined"
@@ -58,7 +58,7 @@
         class="mb-8"
         color="indigo-darken-4"
         size="large"
-        to="/Dashboard"
+        to="/programacao"
         block
       >
         Iniciar a Sessão
