@@ -186,7 +186,7 @@
                             
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
                                 
-                                <input type="text"  style="font-size: 10px;" class="w-100 border pa-3 rounded " readonly :value="ProgramacaoLocal"> 
+                                <input type="text"  style="font-size: 10px;" class="w-100 border px-3 py-1 rounded " readonly :value="ProgramacaoLocal"> 
                             </v-col>
                             <v-spacer></v-spacer>
                             <v-col cols="3" v-if="ProgramacaoLocal!=='Aguardando Seleção...'">
@@ -207,7 +207,7 @@
                             <v-col cols="3" v-if="Situacao == 'Indisponivel'">
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Motivo Indisponibilidade</p>
                                 <v-select
-                                :items="['Inacessivel', 'Danificado', 'Negligencia']"
+                                :items="['Bloqueado', 'Carga baixa', 'Desativado', 'Desligado', 'Difícil acesso', 'Não localizado']"
                                 density="compact"
                                 variant="outlined"
                                 >
@@ -269,89 +269,129 @@
                             <input type="text" readonly class="border rounded px-2 py-1 w-100">
                         </v-col>
                     </v-row>
+
+
                     <!--inspeção e foto-->
                     <v-row dense > 
                         <v-col cols="6" >
                             <div style="height: 280px; overflow-y: auto" class="hiddenscrool">
 
                             
-                            <div class="w-50 pa-0">
+                            <div class="w-75 pa-0 " style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Técnica</p>
                                 <v-select
-                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                :items="modalidade == 'Elétrico'?['Sensitiva', 'Termografia', 'Ultrassom']:['Sensitiva', 'Análise de Vibração']"
                                 density="compact"
                                 size="small"
                                 variant="outlined"
                                 single-line
+                              
                                 >
+                                <template v-slot:item="{ item, index, props }">
+                                    <p
+                                    @click="props.onClick"
+                                    @mouseenter="props.onMouseenter"
+                                    @mouseleave="props.onMouseleave"
+                                    style="font-size: 10px;"
+                                    >
+                                    {{ item.title }}
+                                    </p>
+                              
+                                </template>
+
                                 <template v-slot:selection="{ item}">
-                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                    <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
                                 </v-select>
                             </div>
 
-                            <div class="w-50 pa-0">
+                            <div class="w-50 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Status</p>
                                 <v-select
-                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                :items="['Sanada', 'Pendente']"
                                 density="compact"
                                 size="small"
                                 variant="outlined"
                                 single-line
                                 >
                                 <template v-slot:selection="{ item}">
-                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                    <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
                                 </v-select>
 
                             </div>
-                            <div class="w-75 pa-0">
+                            <div class="w-75 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Ponto</p>
-                                <v-select
-                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                <v-autocomplete
+                                :items="['Acoplamento', 'Acumulador', 'Arrastador', 'Balança', 'Bandejamento de cabo', 'Barragem', 'Base metálica', 'Base civil']"
                                 density="compact"
                                 size="small"
                                 variant="outlined"
                                 single-line
+                                no-data-text="sem dados equivalentes"
+                                class="text-caption"
                                 >
                                 <template v-slot:selection="{ item}">
-                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                    <span style="font-size: 10px;">{{ item.title }}</span>
                                 </template>
-                                </v-select>
+                                </v-autocomplete>
 
                             </div>
-                            <div class="w-75 pa-0">
+                            <div class="w-75 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Sintoma</p>
-                                <v-select
+                                <v-autocomplete
+                                :items="['Acionamento anormal', 'Alargamento', 'Amassado(a)', 'Aterramento elétrico', 'Atrito', 'Ausente', 'Baixa vazão', 'Cabo de terra irregular']"
+                                density="compact"
+                                size="small"
+                                variant="outlined"
+                                single-line
+                                no-data-text="sem dados equivalentes"
+                                class="text-caption"
+                                >
+                                <template v-slot:selection="{ item}">
+                                    <span style="font-size: 10px;" >{{ item.title }}</span>
+                                </template>
+                                </v-autocomplete>
+
+                            </div>
+
+                            <div class="w-75 pa-0" style="height: 40px;" v-if="false">
+                                <p class=" ml-2 " style="font-size: 10px;">Causa</p>
+                                <v-autocomplete
                                 :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
                                 density="compact"
                                 size="small"
                                 variant="outlined"
                                 single-line
+                                no-data-text="sem dados equivalentes"
+                                class="text-caption"
                                 >
                                 <template v-slot:selection="{ item}">
-                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                    <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
-                                </v-select>
+                                </v-autocomplete>
 
                             </div>
-                            <div class="w-75 pa-0">
+
+                            <div class="w-75 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Recomendação</p>
-                                <v-select
-                                :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                <v-autocomplete
+                                :items="['Ajustar', 'Alinhar', 'Aliviar', 'Analisar óleo', 'Aterrar', 'Balancear', 'Calibrar', 'Checar projeto', 'Completar', 'Desamassar', 'Destravar rolo', 'Drenar', 'Esfriar temperatura', 'Fixar', 'Identificar', 'Instalar', 'Instalar parafuso', 'Limpar', 'Lubrificar', 'Modificar projeto', 'Monitorar', 'Montar', 'Normalizar', 'Normalizar nível', 'Padronizar', 'Pintar', 'Projetar', 'Reapertar', 'Reavaliar', 'Recuperar', 'Regularizar', 'Reparar', 'Reposicionar', 'Retirar umidade', 'Sanar vazamento', 'Substituir', 'Tensionar']"
                                 density="compact"
                                 size="small"
                                 variant="outlined"
                                 single-line
+                                no-data-text="sem dados equivalentes"
+                                class="text-caption"
                                 >
                                 <template v-slot:selection="{ item}">
-                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                    <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
-                                </v-select>
+                                </v-autocomplete>
 
                             </div>
 
-                            <div class="w-50 pa-0">
+                            <div class="w-50 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Prazo (dias)</p>
                                 <v-select
                                 :items="['10 dias', '21 dias', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
@@ -361,7 +401,7 @@
                                 single-line
                                 >
                                 <template v-slot:selection="{ item}">
-                                    <span style="font-size: 10px;" class="font-weight-black ">{{ item.title }}</span>
+                                    <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
                                 </v-select>
                             </div>
@@ -470,6 +510,9 @@ const selectedPosicoesJson  = ref(null)
 const Situacao = ref('')
 const imageUrl = ref(null)
 const opcao = ref('')
+
+
+
 const headers= [
         {title: 'Locais', align: 'start', key: 'title',   },
         { title: 'status', key: 'status', width: "30%", align: 'center',},
@@ -538,6 +581,8 @@ const abrirModal = (op) => {
 }
 
 
+
+const modalidade = ref('Mecânico')
 </script>
 
 
