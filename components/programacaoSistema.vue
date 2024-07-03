@@ -418,24 +418,3 @@ const removerProgramacaoSelecionada = (item) => {
 
 
 </script>
-
-<style scoped>
-input:focus {
-box-shadow: 0 0 0 0;
-outline: 0;
-}
-
-.v-field.v-field--appended {
-    --v-field-padding-end: 0px;
-}
-.v-input--density-compact .v-field--variant-outlined, .v-input--density-compact 
-.v-field--single-line, .v-input--density-compact .v-field--no-label {
-    --v-field-padding-bottom: 0px;
-}
-
-.v-input--density-compact {
-    --v-input-control-height: 0px !important;
-    --v-input-padding-top: 0px !important;
-}
-
-</style>
