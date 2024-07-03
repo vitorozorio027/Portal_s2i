@@ -72,7 +72,7 @@
                                                 >
 
                                                     
-                                                        <div style="width: 8%;"  class="mt-5">
+                                                        <div style="width: 8%;"  class="mt-6">
                                                                 <v-select
                                                                 variant="outlined"
                                                                 density="compact"
@@ -88,26 +88,26 @@
 
 
                                                         <div style="width: 6%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded" :value="card.Ordem">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-1  rounded" :value="card.Ordem">
                                                         </div>
 
                                                         
                                                         <div style="width: 25%;" class="">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded" :value="card.Desc_Insp">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-1  rounded" :value="card.Desc_Insp">
                                                         </div>
 
                                                         <div style="width: 9%;" class="mx-2">
-                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-1  rounded">
                                                         </div>
 
                                                         <div style="width: 9%;" class="">
-                                                                <input type="date" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
+                                                                <input type="date" class="border border-sm w-100 text-caption px-1  rounded">
                                                         </div>
                                                         <div style="width: 9%;" class="mx-2">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-1  rounded">
                                                         </div>
                                                         <div style="width: 9%;" class="">
-                                                                <input type="text" class="border border-sm w-100 text-caption px-2 pt-1 rounded">
+                                                                <input type="text" class="border border-sm w-100 text-caption px-1  rounded">
                                                         </div>
                                                         <div  class=" mx-2">
                                                                 <v-icon
@@ -418,3 +418,15 @@ const removerProgramacaoSelecionada = (item) => {
 
 
 </script>
+
+
+
+<style>
+input:focus {
+box-shadow: 0 0 0 0;
+outline: 0;
+}
+
+
+</style>
+
