@@ -1,10 +1,6 @@
 <template >
     <div >
-   
-    
-          <programacaoSistema />
-    
-        
+      <programacaoSistema />
     </div>
 </template>
 

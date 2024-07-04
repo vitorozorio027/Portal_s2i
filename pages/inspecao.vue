@@ -2,7 +2,7 @@
   <div >
     <v-container>
       <v-main>
-        <InspecaoSistema />
+        <inspecao />
       </v-main>
     </v-container>
       

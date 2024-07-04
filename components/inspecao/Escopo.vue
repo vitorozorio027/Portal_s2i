@@ -1,4 +1,5 @@
 <template >
+   
         <!--Inspeção-->
         <v-row>
             <v-col cols="5"
@@ -43,13 +44,38 @@
                     </template>
 
                     <template v-slot:item.status="{ value }">
+                       
+
                             <v-chip
                             size="x-small"
-                            :color="value == 'Concluído'?'light-green-lighten-1':'grey'"
+                            label
+                            v-if="value == 'Aguardando'"
+                            
+                            >
+                            {{ value }}
+                            </v-chip>
+
+                            <v-chip
+                            size="x-small"
+                            label
+                            v-if="value == 'Sem anomalia'"
+                            color="teal-darken-4"
                             variant="flat"
                             >
                             {{ value }}
                             </v-chip>
+
+                            <v-chip
+                            size="x-small"
+                            label
+                            v-if="value == 'Indisponivel'"
+                            color="blue-grey-lighten-1"
+                            variant="flat"
+                            >
+                            {{ value }}
+                            </v-chip>
+
+
                     </template>
                             
                     </v-data-table-virtual> 
@@ -78,7 +104,8 @@
                             <v-col cols="6">
                             
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black " style="font-size: 10px;">Local</p>
-                                <input type="text"  style="font-size: 10px;" class="w-100 border py-1 px-2 rounded " readonly :value="ProgramacaoLocal"> 
+                                
+                                <input type="text"  style="font-size: 10px;" class="w-100 border px-3 py-1 rounded " readonly :value="ProgramacaoLocal"> 
                             </v-col>
                             <v-spacer></v-spacer>
                             <v-col cols="3" v-if="ProgramacaoLocal!=='Aguardando Seleção...'">
@@ -99,7 +126,7 @@
                             <v-col cols="3" v-if="Situacao == 'Indisponivel'">
                                 <p  class=" mt-6 mb-2 ml-2 font-weight-black" style="font-size: 10px;">Motivo Indisponibilidade</p>
                                 <v-select
-                                :items="['Inacessivel', 'Danificado', 'Negligencia']"
+                                :items="['Bloqueado', 'Carga baixa', 'Desativado', 'Desligado', 'Difícil acesso', 'Não localizado']"
                                 density="compact"
                                 variant="outlined"
                                 >
@@ -121,16 +148,19 @@
                           
                         </div>
 
-                        <div class="text-end" v-if="Situacao">
-                            <v-btn variant="flat" color="grey" @click="abrirModal('perfeitas condicoes')" v-if="Situacao == 'Perfeitas Condições'">Inserir Foto</v-btn>
-                            <v-btn variant="flat" color="grey" v-if="Situacao == 'Com anomalia'" @click="abrirModal('anomalia')" >Registrar Anomalia</v-btn>
+                        <div class="text-end d-flex justify-end" v-if="Situacao">
+                            <InspecaoModalinspecaoRegistrofoto v-if="Situacao == 'Perfeitas Condições'" />
+                            <InspecaoModalinspecaoRegistroanomalia v-if="Situacao == 'Com anomalia'" />
                             <v-btn variant="flat"  color="indigo-darken-4" class="ml-2">Salvar</v-btn>
                         </div>
                    
                     </div>
                 </v-col>
             </v-row>
+
+
 </template>
+
 
 
 <script setup>
@@ -143,6 +173,9 @@ const selectedPosicoesJson  = ref(null)
 const Situacao = ref('')
 const imageUrl = ref(null)
 const opcao = ref('')
+
+
+
 const headers= [
         {title: 'Locais', align: 'start', key: 'title',   },
         { title: 'status', key: 'status', width: "30%", align: 'center',},
@@ -150,39 +183,49 @@ const headers= [
 
 
 const elements = [
-    {title: 'Espaço reservado para os Locais s2i-PO00001', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00002', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00003', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00004', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00005', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00006', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00007', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00008', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00009', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00010', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00011', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00012', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00013', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00014', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00015', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00016', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00017', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00018', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00019', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00020', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00021', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00022', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00023', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00024', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00025', status: 'pendente'},
-    {title: 'Espaço reservado para os Locais s2i-PO00026', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00027', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00028', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00029', status: 'Concluído'},
-    {title: 'Espaço reservado para os Locais s2i-PO00030', status: 'Concluído'}
+    {title: 'Espaço reservado para os Locais s2i-PO00001', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00002', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00003', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00004', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00005', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00006', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00007', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00008', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00009', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00010', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00011', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00012', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00013', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00014', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00015', status: 'Aguardando'},
+    {title: 'Espaço reservado para os Locais s2i-PO00016', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00017', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00018', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00019', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00020', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00021', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00022', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00023', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00024', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00025', status: 'Sem anomalia'},
+    {title: 'Espaço reservado para os Locais s2i-PO00026', status: 'Indisponivel'},
+    {title: 'Espaço reservado para os Locais s2i-PO00027', status: 'Indisponivel'},
+    {title: 'Espaço reservado para os Locais s2i-PO00028', status: 'Indisponivel'},
+    {title: 'Espaço reservado para os Locais s2i-PO00029', status: 'Indisponivel'},
+    {title: 'Espaço reservado para os Locais s2i-PO00030', status: 'Indisponivel'}
 ];
 
 
+const onFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      imageUrl.value = e.target.result
+    }
+    reader.readAsDataURL(file)
+  }
+}
 
 
 watch(selectedPosicoesJson, (newValue) => {
@@ -202,7 +245,26 @@ const abrirModal = (op) => {
 
 
 
-
+const modalidade = ref('Mecânico')
 </script>
 
 
+<style>
+        input:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+        }
+
+        .hover-foto:hover{
+            cursor: pointer;
+        }
+        .hiddenscrool::-webkit-scrollbar { 
+	        display: none;
+        }
+
+        .menu-selects:hover{
+            background-color: #E0E0E0;
+            cursor: pointer;
+        }
+
+</style>
