@@ -74,6 +74,7 @@
                                                     
                                                         <div style="width: 8%;"  class="mt-6">
                                                                 <v-select
+                                                                v-model="card.Modalidade"
                                                                 variant="outlined"
                                                                 density="compact"
                                                                 :items="['Mecânico', 'Elétrico']"
@@ -307,6 +308,11 @@
 <script setup>
 import { ref } from 'vue';
 
+
+
+
+
+
 const teste = ref(false)
 const dialog = ref (false)
 const loading = ref(false);
@@ -374,13 +380,45 @@ const elements = [
 
 
 
-const cards = ref([])
+const cards = ref([
+
+{
+    Modalidade: 'Mecânico',
+    Ordem: '12345',
+    Desc_Insp: '',
+    Data_inicio: '',
+    Data_fim: '',
+    Analista: 'Ozorio',
+    Inspetor: ''
+  },
+
+
+  {
+    Modalidade: 'Mecânico',
+    Ordem: '',
+    Desc_Insp: '',
+    Data_inicio: '',
+    Data_fim: '',
+    Analista: '',
+    Inspetor: ''
+  },
+  {
+    Modalidade: 'Mecânico',
+    Ordem: '',
+    Desc_Insp: '',
+    Data_inicio: '',
+    Data_fim: '',
+    Analista: '',
+    Inspetor: ''
+  }
+
+])
 
 
 
 const addCard = () => {
   cards.value.push({
-    Modalidade: '',
+    Modalidade: 'Mecânico',
     Ordem: '',
     Desc_Insp: '',
     Data_inicio: '',

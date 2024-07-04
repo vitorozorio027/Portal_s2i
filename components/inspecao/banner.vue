@@ -11,42 +11,42 @@
                     <v-col cols="2">
                         <div>
                             <p style="font-size: 10px;" class="ml-2">Modalidade</p>
-                            <input type="text" style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                            <input type="text" style="font-size: 10px;" class="w-100 pX-2 border mt-1 rounded">
                         </div>
 
                     </v-col>
                     <v-col cols="1">
                         <div >
                             <p style="font-size: 10px;" class="ml-2">Ordem</p>
-                            <input type="text"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                            <input type="text"  style="font-size: 10px;" class="w-100 px-2 border mt-1 rounded">
                         </div>
 
                     </v-col>
                     <v-col cols="3">
                         <div>
                             <p style="font-size: 10px;" class="ml-2">Descrição da Inspeção</p>
-                            <input type="text"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                            <input type="text"  style="font-size: 10px;" class="w-100 px-2 border mt-1 rounded">
                         </div>
 
                     </v-col>
                     <v-col cols="2">
                         <div>
                             <p style="font-size: 10px;" class="ml-2">Data Inicio</p>
-                            <input type="date"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                            <input type="date"  style="font-size: 10px;" class="w-100 px-2 border mt-1 rounded">
                         </div>
 
                     </v-col>
                     <v-col cols="2">
                         <div>
                             <p style="font-size: 10px;" class="ml-2">Data Fim</p>
-                            <input type="date"  style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                            <input type="date"  style="font-size: 10px;" class="w-100 px-2 border mt-1 rounded">
                         </div>
 
                     </v-col>
                     <v-col cols="2">
                         <div>
                             <p style="font-size: 10px;" class="text-center">status</p>
-                            <input type="text" style="font-size: 10px;" class="w-100 pa-2 border mt-1 rounded">
+                            <input type="text" style="font-size: 10px;" class="w-100 px-2 border mt-1 rounded">
                         </div>
 
                     </v-col>
@@ -67,15 +67,10 @@
             
     
             <div class="text-caption d-flex flex-column justify-center  h-100 py-2">
-                    <p>Locais Planejados = <span>232</span></p>
-                    <p>Locais Relatados = <span>97 (42%)</span></p>
+                    <p>Locais Planejados = <span>0</span></p>
+                    <p>Locais Relatados = <span>0 (0%)</span></p>
             </div>
             </div>
-                
-            
-        
-
-
             </v-col>
         </v-row>
 
