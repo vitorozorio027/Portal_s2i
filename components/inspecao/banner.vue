@@ -67,7 +67,7 @@
             
     
             <div class="text-caption d-flex flex-column justify-center  h-100 py-2">
-                    <p>Locais Planejados = <span>0</span></p>
+                    <p>Locais Planejados = <span>{{ escopoElementos.length }}</span></p>
                     <p>Locais Relatados = <span>0 (0%)</span></p>
             </div>
             </div>
@@ -88,7 +88,9 @@ const ordem = ref('');
 const descricao = ref('');
 const Data_inicio = ref('');
 const Data_fim = ref('');
-const status = ref('')
+const status = ref('');
+const escopoElementos = ref([]);
+
 onMounted(() => {
   const storedCards = localStorage.getItem('cards');
   if (storedCards) {
@@ -100,6 +102,7 @@ onMounted(() => {
     Data_inicio.value = card.Data_inicio
     Data_fim.value = card.Data_fim
     status.value = card.status
+    escopoElementos.value = card.Escopo
   }
 });
 </script>
