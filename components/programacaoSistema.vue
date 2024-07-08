@@ -44,7 +44,7 @@
                   class="d-flex px-1 mb-2 elevation-2 rounded border align-center"
                   v-for="(card, i) in cards"
                   :key="i"
-                  style="height: 45px;"
+                  style="height: 45px; position: relative;"
                 >
                   <div style="width: 8%;" class="mt-6">
                     <v-select
@@ -80,29 +80,44 @@
                     <input required type="text" class="border border-sm w-100 text-center text-caption px-1 rounded" v-model="card.Analista">
                   </div>
                   <div style="width: 9%;">
-                    <input required type="text" class="border border-sm w-100 text-center text-caption px-1 rounded" v-model="card.Inspetor">
+                    <input required type="text" class="border border-sm w-100 text-center text-caption px-1 rounded" v-model="card.Inspetor" >
                   </div>
                   <div class="mx-2">
-                    <v-icon icon="mdi-database-search" class="text-h6 mr-4" @click="abrirModal('escopo', i)"></v-icon>
+                    <v-icon icon="mdi-database-search" :color="card.Escopo.length>0?'grey-lighten-1':'black'" class="text-h6 mr-4 " @click="abrirModal('escopo', i)"></v-icon>
                   </div>
                   <div>
-                    <v-icon icon="mdi-cogs" class="text-h6" @click="abrirModal('recurso', i)"></v-icon>
+                    <v-icon icon="mdi-cogs" class="text-h6" :color="card.recurso.length>0?'grey-lighten-1':'black'" @click="abrirModal('recurso', i)"></v-icon>
                   </div>
                   <div style="width: 5%;" class="mx-4">
                     <input type="text" v-model="card.status" style="font-size: 10px;" class="border border-sm w-100 px-1 py-1 rounded text-center" disabled>
                   </div>
                   <div class="d-flex justify-center align-center">
-                    <v-icon icon="mdi-magnify" class="text-body-2 d-none d-lg-block" @click="true"></v-icon>
-                    <nuxt-link :to="`/inspecao/${i}`">
-                      <v-icon icon="mdi-text-box-check" class="text-body-2 d-block mx-1"></v-icon>
-                    </nuxt-link>
+                    <v-icon icon="mdi-magnify" class="text-body-2 d-none d-lg-block" @click="true" color="grey-lighten-1"></v-icon>
+                    <v-icon icon="mdi-text-box-check" class="text-body-2 d-block mx-1" @click="CarregarInspecao(i)" :color="validacaocamposatual(i)?'black':'grey-lighten-1'"></v-icon>
                     <v-icon icon="mdi-trash-can" class="text-body-2 d-none d-lg-block" @click="removerProgramacao(i)"></v-icon>
                   </div>
                 </div>
-                <p class="text-center w-75 mx-auto pa-2 rounded  text-caption mt-10 bg-red-darken-3" v-if="IsvalidError">Voce precisa preencher todos os campos !</p>
-      
+                
+                <div class="w-50 mx-auto" style="position: absolute; z-index: 10; left: 50%; top:-25%; transform: translateX(-40%); transition: all 2s ease-in;">
+                  <v-alert
+                    v-model="IsvalidError"
+                    border="start"
+                    close-label="Close Alert"
+                    color="red-accent-4"
+                    title="Preenchimento Obrigatório"
+                    variant="flat"
+                    closable
+                    density="compact"
+                    class="text-caption"
+                  >
+                    Existe Campos obrigatório que não foram preenchidos !
+                  </v-alert>
+                </div>
+
               </div>
-              <!--alerta-->
+            
+
+
           
               <!--MODAL-->
               <v-dialog v-model="dialog" width="auto" persistent>
@@ -220,7 +235,9 @@
       
       <script setup>
       import { ref, onMounted, watch } from 'vue';
-      
+      import { useRouter } from 'vue-router';
+
+      const router = useRouter();
       const dialog = ref(false);
       const loading = ref(false);
       const selectedProgramacao = ref([]);
@@ -248,10 +265,37 @@
         }
       });
       
+
+      const validacaoUltimocampos = () =>{
+          const ultimoCard = cards.value[cards.value.length - 1];
+          return ultimoCard.Modalidade !== '' 
+            && ultimoCard.Ordem !== '' 
+            && ultimoCard.Desc_Insp !== '' 
+            && ultimoCard.Data_inicio !== '' 
+            && ultimoCard.Data_fim !== '' 
+            && ultimoCard.Inspetor !== '' 
+            && ultimoCard.Escopo.length > 0;
+      }
+
+      const validacaocamposatual = (i) =>{
+          const CardAtual = cards.value[i];
+          return CardAtual.Modalidade !== '' 
+            && CardAtual.Ordem !== '' 
+            && CardAtual.Desc_Insp !== '' 
+            && CardAtual.Data_inicio !== '' 
+            && CardAtual.Data_fim !== '' 
+            && CardAtual.Inspetor !== '' 
+            && CardAtual.Escopo.length > 0;
+      }
+
+
+
+
       const addCard = () => {
+
         IsvalidError.value = false
         if(cards.value.length>0){
-          if(cards.value[cards.value.length-1].Modalidade !== '' && cards.value[cards.value.length-1].Ordem !== '' && cards.value[cards.value.length-1].Desc_Insp !== '' && cards.value[cards.value.length-1].Data_inicio !== '' && cards.value[cards.value.length-1].Data_fim !== '' && cards.value[cards.value.length-1].Inspetor !== '' && cards.value[cards.value.length-1].Escopo !== '' && cards.value[cards.value.length-1].recurso !== ''){
+          if(validacaoUltimocampos()){
               cards.value.push({
               Modalidade: '',
               Ordem: '',
@@ -282,8 +326,6 @@
           recurso: '',
           status: 'Pendente',
         });
-
-        //localStorage.setItem('cards', JSON.stringify(cards.value));
       };
       
       const opcao = ref('');
@@ -322,6 +364,15 @@
       watch(cards, (newValue) => {
         localStorage.setItem('cards', JSON.stringify(newValue));
       }, { deep: true });
+
+      const CarregarInspecao = (index) =>{
+        if(!validacaocamposatual(index))
+        {
+          IsvalidError.value = true
+          return
+        }
+        router.push(`/inspecao/${index}`)
+      }
 </script>
       
 <style>
