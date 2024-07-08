@@ -2,9 +2,8 @@
     <div >
       <v-container>
         <v-main>
-          <usuarios />
+          <tableSistemas />
         </v-main>
-        
       </v-container>
         
     </div>
@@ -13,15 +12,11 @@
 <script setup>
 import { onMounted } from 'vue';
 
-definePageMeta({
-  layout: 'dms',
-});
-
 const TitlePages = useTitlePagesStore()
 
 onMounted(() => {
-  TitlePages.setPageTitle('MCI - Cadastro de Usuários');
+  TitlePages.setPageTitle('MCI - Cadastro de Sistemas');
   TitlePages.setDrawerState(true)
 });
-</script>
 
+</script>

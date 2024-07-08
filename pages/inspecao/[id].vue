@@ -13,10 +13,6 @@
   <script setup>
   import { onMounted } from 'vue';
   
-  definePageMeta({
-    layout: 'dms',
-  });
-  
   const TitlePages = useTitlePagesStore()
   
   onMounted(() => {
