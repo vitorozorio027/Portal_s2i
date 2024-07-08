@@ -19,7 +19,7 @@
                     
                 </div>  
                     <v-data-table-virtual
-                    :items="elements"
+                    :items="escopoElementos"
                     :headers="headers"
                     :search="procurar"
                     height="300"
@@ -48,32 +48,12 @@
 
                             <v-chip
                             size="x-small"
-                            label
-                            v-if="value == 'Aguardando'"
+                            label                            
+                            >
+                            Aguardando
+                            </v-chip>
+
                             
-                            >
-                            {{ value }}
-                            </v-chip>
-
-                            <v-chip
-                            size="x-small"
-                            label
-                            v-if="value == 'Sem anomalia'"
-                            color="teal-darken-4"
-                            variant="flat"
-                            >
-                            {{ value }}
-                            </v-chip>
-
-                            <v-chip
-                            size="x-small"
-                            label
-                            v-if="value == 'Indisponivel'"
-                            color="blue-grey-lighten-1"
-                            variant="flat"
-                            >
-                            {{ value }}
-                            </v-chip>
 
 
                     </template>
@@ -120,7 +100,20 @@
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
                                 </template>
-                            
+
+                                <template v-slot:item="{ item, props }">
+                               
+                                    <p
+                                    @click="props.onClick"
+                                    @mouseenter="props.onMouseenter"
+                                    @mouseleave="props.onMouseleave"
+                                    v-bind="props"
+                                    style="font-size: 10px;"
+                                    class="tex-center w-100 py-1 px-2 menu-selects"
+                                    >
+                                    {{ item.title }}
+                                    </p>
+                                </template>
                                 </v-select>
                             </v-col>
                             <v-col cols="3" v-if="Situacao == 'Indisponivel'">
@@ -133,6 +126,20 @@
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 9px;" class="font-weight-black ">{{ item.title }}</span>
                                 </template>
+
+                                <template v-slot:item="{ item, props }">
+                               
+                               <p
+                               @click="props.onClick"
+                               @mouseenter="props.onMouseenter"
+                               @mouseleave="props.onMouseleave"
+                               v-bind="props"
+                               style="font-size: 10px;"
+                               class="tex-center w-100 py-1 px-2 menu-selects"
+                               >
+                               {{ item.title }}
+                               </p>
+                           </template>
                             
                                 </v-select>
                                 
@@ -164,15 +171,36 @@
 
 
 <script setup>
-import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
 
-const dialog = ref (false)
+const route = useRoute();
+const id = route.params.id;
+const modalidade = ref('');
+const escopoElementos = ref([])
+
+onMounted(() => {
+  const storedCards = localStorage.getItem('cards');
+  if (storedCards) {
+    const cards = JSON.parse(storedCards);
+    const card = cards[id];
+    modalidade.value = card.Modalidade
+    escopoElementos.value = card.Escopo
+
+  }
+});
+
+
+
+
+
+
 const procurar = ref('');
 const ProgramacaoLocal = ref('Aguardando Seleção...')
 const selectedPosicoesJson  = ref(null)
 const Situacao = ref('')
 const imageUrl = ref(null)
-const opcao = ref('')
+
 
 
 
@@ -238,14 +266,11 @@ watch(selectedPosicoesJson, (newValue) => {
   }
 })
 
-const abrirModal = (op) => {
-      opcao.value = op;
-    dialog.value = true;
-}
 
 
 
-const modalidade = ref('Mecânico')
+
+
 </script>
 
 

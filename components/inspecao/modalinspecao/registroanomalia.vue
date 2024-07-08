@@ -9,7 +9,7 @@
         >
 
         <v-card
-            width="500"
+            max-width="400"
             height="700"
             >
                 <v-card-title
@@ -18,14 +18,14 @@
                 
                 <v-card-item>
                     <v-row dense>
-                        <v-col cols="8">
-                            <span class="text-caption ml-2">Local</span>
-                            <input type="text" readonly class="border rounded px-2 w-100">
+                        <v-col cols="9">
+                            <span class="" style="font-size: 10px;">Local</span>
+                            <input type="text" readonly class="border rounded px-2 w-100" style="font-size: 10px;" v-model="local">
                         </v-col>
                         <v-spacer></v-spacer>
-                        <v-col cols="4">
-                            <span class="text-caption ml-2">Modalidade</span>
-                            <input type="text" readonly class="border rounded px-2  w-100">
+                        <v-col cols="3">
+                            <span class="text-center w-100" style="font-size: 10px;">Modalidade</span>
+                            <input type="text" readonly class="border rounded px-2  w-100 text-center" v-model="modalidade" style="font-size: 10px;">
                         </v-col>
                     </v-row>
 
@@ -36,7 +36,7 @@
                             <div style="height: 280px; overflow-y: auto" class="hiddenscrool">
 
                             
-                            <div class="w-75 pa-0 " style="height: 40px;">
+                            <div class="w-100 pa-0 " style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Técnica</p>
                                 <v-select
                                 :items="modalidade == 'Elétrico'?['Sensitiva', 'Termografia', 'Ultrassom']:['Sensitiva', 'Análise de Vibração']"
@@ -67,7 +67,7 @@
                                 </v-select>
                             </div>
 
-                            <div class="w-50 pa-0" style="height: 40px;">
+                            <div class="w-75 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Status</p>
                                 <v-select
                                 :items="['Sanada', 'Pendente']"
@@ -97,9 +97,9 @@
                                 </v-select>
 
                             </div>
-                            <div class="w-75 pa-0" style="height: 40px;">
+                            <div class="w-100 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Ponto</p>
-                                <v-autocomplete
+                                <v-select
                                 :items="['Acoplamento', 'Acumulador', 'Arrastador', 'Balança', 'Bandejamento de cabo', 'Barragem', 'Base metálica', 'Base civil']"
                                 density="compact"
                                 size="small"
@@ -127,12 +127,12 @@
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 10px;">{{ item.title }}</span>
                                 </template>
-                                </v-autocomplete>
+                                </v-select>
 
                             </div>
-                            <div class="w-75 pa-0" style="height: 40px;">
+                            <div class="w-100 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Sintoma</p>
-                                <v-autocomplete
+                                <v-select
                                 :items="['Acionamento anormal', 'Alargamento', 'Amassado(a)', 'Aterramento elétrico', 'Atrito', 'Ausente', 'Baixa vazão', 'Cabo de terra irregular']"
                                 density="compact"
                                 size="small"
@@ -160,13 +160,13 @@
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
-                                </v-autocomplete>
+                                </v-select>
 
                             </div>
 
-                            <div class="w-75 pa-0" style="height: 40px;" v-if="false">
+                            <div class="w-100 pa-0" style="height: 40px;" v-if="false">
                                 <p class=" ml-2 " style="font-size: 10px;">Causa</p>
-                                <v-autocomplete
+                                <v-select
                                 :items="['Sensitiva', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
                                 density="compact"
                                 size="small"
@@ -193,13 +193,13 @@
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
-                                </v-autocomplete>
+                                </v-select>
 
                             </div>
 
-                            <div class="w-75 pa-0" style="height: 40px;">
+                            <div class="w-100 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Recomendação</p>
-                                <v-autocomplete
+                                <v-select
                                 :items="['Ajustar', 'Alinhar', 'Aliviar', 'Analisar óleo', 'Aterrar', 'Balancear', 'Calibrar', 'Checar projeto', 'Completar', 'Desamassar', 'Destravar rolo', 'Drenar', 'Esfriar temperatura', 'Fixar', 'Identificar', 'Instalar', 'Instalar parafuso', 'Limpar', 'Lubrificar', 'Modificar projeto', 'Monitorar', 'Montar', 'Normalizar', 'Normalizar nível', 'Padronizar', 'Pintar', 'Projetar', 'Reapertar', 'Reavaliar', 'Recuperar', 'Regularizar', 'Reparar', 'Reposicionar', 'Retirar umidade', 'Sanar vazamento', 'Substituir', 'Tensionar']"
                                 density="compact"
                                 size="small"
@@ -226,14 +226,14 @@
                                 <template v-slot:selection="{ item}">
                                     <span style="font-size: 10px;" >{{ item.title }}</span>
                                 </template>
-                                </v-autocomplete>
+                                </v-select>
 
                             </div>
 
-                            <div class="w-50 pa-0" style="height: 40px;">
+                            <div class="w-75 pa-0" style="height: 40px;">
                                 <p class=" ml-2 " style="font-size: 10px;">Prazo (dias)</p>
                                 <v-select
-                                :items="['10 dias', '21 dias', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                :items="['10 dias', '21 dias', '3 dias', '90 dias', '30 dias']"
                                 density="compact"
                                 size="small"
                                 variant="outlined"
@@ -278,7 +278,7 @@
                     <v-row dense>
                         <v-col cols="12">
                             <span class="ml-2" style="font-size: 10px;">Detalhes Adicionais</span>
-                            <input type="text"  class="border rounded px-2 py-1 w-100">
+                            <input type="text"  class="border rounded px-2 py-1 w-100" style="font-size: 10px;">
                         </v-col>
                     </v-row>
                 </v-card-item>
@@ -307,7 +307,26 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
+
+const route = useRoute();
+const id = route.params.id;
+const modalidade = ref('');
+const escopoElementos = ref([])
+const local = ref('Espaço reservado para os Locais s2i-PO00001')
+
+onMounted(() => {
+  const storedCards = localStorage.getItem('cards');
+  if (storedCards) {
+    const cards = JSON.parse(storedCards);
+    const card = cards[id];
+    modalidade.value = card.Modalidade
+    escopoElementos.value = card.Escopo
+
+  }
+});
+
 
 const dialog = ref (false)
 const imageUrl = ref(null)
@@ -324,5 +343,5 @@ const onFileChange = (event) => {
 }
 
 
-const modalidade = ref('Mecânico')
+
 </script>
