@@ -20,6 +20,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "vite-plugin-vuetify": "^2.0.3",
     "vuetify": "^3.6.5"
   }

@@ -6,7 +6,7 @@
           <v-list-item>
             <v-btn icon="mdi-menu" variant="text" @click="drawer = !drawer"></v-btn>
           </v-list-item>
-          <v-list-item class="text-body-2 font-weight-black">{{ pageTitle }}</v-list-item>
+          <v-list-item class="text-body-2 font-weight-black">{{ pageTitle }}, {{ counter }}</v-list-item>
         </v-list>
       </v-app-bar-title>
       <template #append>
@@ -92,6 +92,7 @@ import { ref, watch } from 'vue'
 const TitlePages = useTitlePagesStore()
 const pageTitle = ref(TitlePages.pageTitle)
 const drawerstate = ref(TitlePages.drawerstate)
+const counter = ref (TitlePages.counter)
 
 watch(() => TitlePages.pageTitle, (newTitle) => {
   pageTitle.value = newTitle
@@ -99,6 +100,10 @@ watch(() => TitlePages.pageTitle, (newTitle) => {
 
 watch(() => TitlePages.drawerstate, (newdrawerstate) => {
   drawerstate.value = newdrawerstate
+})
+
+watch(() => TitlePages.counter, (newcounterstate) => {
+  counter.value = newcounterstate
 })
 
 const drawer = ref(false)

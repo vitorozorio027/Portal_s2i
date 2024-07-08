@@ -75,3 +75,21 @@
         </v-row>
 
 </template>
+
+
+<script setup>
+import { useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
+
+const route = useRoute();
+const id = route.params.id;
+const card = ref(null);
+
+onMounted(() => {
+  const storedCards = localStorage.getItem('cards');
+  if (storedCards) {
+    const cards = JSON.parse(storedCards);
+    card.value = cards[id];
+  }
+});
+</script>
