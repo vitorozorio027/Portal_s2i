@@ -12,10 +12,11 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@pinia/nuxt": "^0.5.1",
+    "chart.js": "^4.4.3",
     "formidable": "^3.5.1",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
-    "vue": "^3.4.27",
+    "vue": "^3.4.31",
     "vue-router": "^4.3.2",
     "xlsx": "^0.18.5"
   },
